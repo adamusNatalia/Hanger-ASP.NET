@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d7e275e64a2f48d1a918d601b1799f67" Name="Diagram1">
+        <EntityTypeShape EntityType="HangerModel.Ad" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HangerModel.Category" Width="1.5" PointX="1.5" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HangerModel.Color" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="HangerModel.Condition" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HangerModel.ForumCategories" Width="1.5" PointX="3.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HangerModel.ForumPosts" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HangerModel.ForumTopic" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HangerModel.Message" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HangerModel.Photos" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HangerModel.Size" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HangerModel.Subcategory" Width="1.5" PointX="0.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HangerModel.Tags" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HangerModel.User" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="HangerModel.FKAd307749" ManuallyRouted="false" />
+        <AssociationConnector Association="HangerModel.FKAd464028" ManuallyRouted="false" />
+        <AssociationConnector Association="HangerModel.FKAd475152" ManuallyRouted="false" />
+        <AssociationConnector Association="HangerModel.FKAd515014" ManuallyRouted="false" />
+        <AssociationConnector Association="HangerModel.FKAd594180" ManuallyRouted="false" />
+        <AssociationConnector Association="HangerModel.FKPhotos129746" ManuallyRouted="false" />
+        <AssociationConnector Association="HangerModel.FKTags638329" ManuallyRouted="false" />
+        <AssociationConnector Association="HangerModel.FKSubcategor437486" ManuallyRouted="false" />
+        <AssociationConnector Association="HangerModel.FKForumTopic789626" ManuallyRouted="false" />
+        <AssociationConnector Association="HangerModel.FKForumPosts217238" ManuallyRouted="false" />
+        <AssociationConnector Association="HangerModel.FKForumPosts909218" ManuallyRouted="false" />
+        <AssociationConnector Association="HangerModel.FKForumTopic340069" ManuallyRouted="false" />
+        <AssociationConnector Association="HangerModel.FKMessage241730" ManuallyRouted="false" />
+        <AssociationConnector Association="HangerModel.FKMessage63833" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
