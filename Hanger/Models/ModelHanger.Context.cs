@@ -13,10 +13,10 @@ namespace Hanger.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HangerEntities : DbContext
+    public partial class HangerDatabase : DbContext
     {
-        public HangerEntities()
-            : base("name=HangerEntities")
+        public HangerDatabase()
+            : base("name=HangerDatabase")
         {
         }
     
@@ -34,9 +34,11 @@ namespace Hanger.Models
         public virtual DbSet<ForumTopic> ForumTopic { get; set; }
         public virtual DbSet<Message> Message { get; set; }
         public virtual DbSet<Photos> Photos { get; set; }
+        public virtual DbSet<PhotoSite> PhotoSite { get; set; }
         public virtual DbSet<Size> Size { get; set; }
         public virtual DbSet<Subcategory> Subcategory { get; set; }
         public virtual DbSet<Tags> Tags { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<UserPhoto> UserPhoto { get; set; }
     }
 }

@@ -12,16 +12,18 @@ namespace Hanger.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Photos
+    public partial class UserPhoto
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public UserPhoto()
+        {
+            this.User = new HashSet<User>();
+        }
+    
         public int Id { get; set; }
         public byte[] Photo { get; set; }
-        public int AdId { get; set; }
-        public string FIle_name { get; set; }
-        public Nullable<bool> Main_photo { get; set; }
-        public Nullable<int> PhotoSiteId { get; set; }
     
-        public virtual Ad Ad { get; set; }
-        public virtual PhotoSite PhotoSite { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> User { get; set; }
     }
 }

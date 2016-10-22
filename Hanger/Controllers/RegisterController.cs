@@ -9,7 +9,7 @@ namespace Hanger.Controllers
 {
     public class RegisterController : Controller
     {
-        private HangerEntities db = new HangerEntities();
+        private HangerDatabase db = new HangerDatabase();
         // GET: Register
         public ActionResult Index()
         {

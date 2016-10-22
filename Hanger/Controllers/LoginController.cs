@@ -8,7 +8,7 @@ namespace Hanger.Controllers
 {
     public class LoginController : Controller
     {
-        private HangerEntities db = new HangerEntities();
+        private HangerDatabase db = new HangerDatabase();
         // GET: Login
         public ActionResult Index()
         {

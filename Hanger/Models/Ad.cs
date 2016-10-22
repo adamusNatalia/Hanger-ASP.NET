@@ -32,6 +32,7 @@ namespace Hanger.Models
         public int ColorId { get; set; }
         public int SubcategoryId { get; set; }
         public int ConditionId { get; set; }
+        public Nullable<bool> Swap { get; set; }
     
         public virtual Condition Condition { get; set; }
         public virtual Size Size { get; set; }

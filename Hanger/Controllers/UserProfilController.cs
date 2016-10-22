@@ -16,35 +16,35 @@ namespace Hanger.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult SubmitPhoto()
-        {
-            HttpPostedFileBase file = Request.Files[0];
-            byte[] imageSize = new byte[file.ContentLength];
-            file.InputStream.Read(imageSize, 0, (int)file.ContentLength);
+        //[httppost]
+        //public actionresult submitphoto()
+        //{
+        //    httppostedfilebase file = request.files[0];
+        //    byte[] imagesize = new byte[file.contentlength];
+        //    file.inputstream.read(imagesize, 0, (int)file.contentlength);
 
 
-            using (HangerEntities DataContext = new HangerEntities())
-            {
-                Photos p = new Photos();
-                p.AdId = 1;
-                p.Name = file.FileName;
+        //    using (hangerentities datacontext = new hangerentities())
+        //    {
+        //        photos p = new photos();
+        //        p.adid = 1;
+        //        p.name = file.filename;
 
-                if (DataContext.Photos != null && DataContext.Photos.Count() != 0)
-                {
-                    p.Id = (from ph in DataContext.Photos
-                                 select ph.Id).Max() + 1;
-                }
-                else
-                    p.Id = 0;
+        //        if (datacontext.photos != null && datacontext.photos.count() != 0)
+        //        {
+        //            p.id = (from ph in datacontext.photos
+        //                    select ph.id).max() + 1;
+        //        }
+        //        else
+        //            p.id = 0;
 
-               
-                p.Type = file.ContentType;
-                DataContext.Photos.Add(p);
-                DataContext.SaveChanges();
-            }
 
-            return RedirectToAction("UserWall", "Wall");
-        }
+        //        p.type = file.contenttype;
+        //        datacontext.photos.add(p);
+        //        datacontext.savechanges();
+        //    }
+
+        //    return redirecttoaction("userwall", "wall");
+        //}
     }
 }

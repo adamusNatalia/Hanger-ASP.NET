@@ -163,6 +163,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Context\ApplicationDataContext.cs" />
+    <Compile Include="Controllers\AdController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -213,6 +214,9 @@
     <Compile Include="Models\Photos.cs">
       <DependentUpon>ModelHanger.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PhotoSite.cs">
+      <DependentUpon>ModelHanger.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Size.cs">
       <DependentUpon>ModelHanger.tt</DependentUpon>
     </Compile>
@@ -223,6 +227,9 @@
       <DependentUpon>ModelHanger.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
+      <DependentUpon>ModelHanger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserPhoto.cs">
       <DependentUpon>ModelHanger.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -264,6 +271,13 @@
     <Content Include="Pictures\Home\slide2.jpg" />
     <Content Include="Pictures\Home\slider1.jpg" />
     <Content Include="Pictures\logo.png" />
+    <EntityDeploy Include="Models\ModelHanger.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelHanger.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModelHanger.edmx.diagram">
+      <DependentUpon>ModelHanger.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -285,12 +299,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Register\View.cshtml" />
-    <Content Include="Views\Login\AfterLogin.cshtml" />
+    <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Ad\" />
     <Folder Include="Views\UserProfil\" />
   </ItemGroup>
   <ItemGroup>
@@ -307,21 +321,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\ModelHanger.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelHanger.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Models\ModelHanger.edmx.diagram">
-      <DependentUpon>ModelHanger.edmx</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Register\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />

@@ -1,17 +1,17 @@
 ﻿@model Hanger.Models.User
 
 @{
-    ViewBag.Title = "Rejestracjar";
+    ViewBag.Title = "Register";
 }
-<h2>Register</h2>
 
+<h2>Register</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Zarejestruj się</h4>
+        <h4>User</h4>
         <hr />
         @Html.ValidationSummary(true)
         <div class="form-group">
@@ -46,19 +46,16 @@
             </div>
         </div>
 
-  
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Zarejestruj się" class="btn btn-default" />
             </div>
         </div>
     </div>
 
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 }
-
-
-
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
