@@ -16,8 +16,8 @@ namespace Hanger.Controllers
         }
         public ActionResult Login()
         {
-            Console.WriteLine("Login");
-            System.Diagnostics.Debug.Write("Login");
+            if (Session["LogedUserID"] == null)
+                Session.Add("LogedUserID", null);
             return View();
 
         }
@@ -39,18 +39,31 @@ namespace Hanger.Controllers
                
                 {
                     Console.WriteLine("Zalogowano");
-                    var v = db.User.Where(a => a.Profil_name.Equals(u.Profil_name) && a.Password.Equals(u.Password)).FirstOrDefault();
+                    //var v = db.User.Where(a => a.Profil_name.Equals(u.Profil_name) && a.Password.Equals(u.Password)).FirstOrDefault();
+                    var user = from p in db.User
+                               where p.Profil_name == u.Profil_name && p.Password == p.Password
+                               select p;
 
-                    if (v != null)
+
+                    //if (v != null)
+                    //{
+                    //    //Session["LogedUserID"] = v.Id.ToString();
+                    //    Session["CurrentUserEmail"] = v.First();
+                    //    Session["LogedUserFullname"] = v.Profil_name.ToString();
+                    //    if (v.Profil_name.ToString() == "admin")
+                    //    {
+                    //        return RedirectToAction("AfterLoginAdmin");
+                    //    }
+                    //    return RedirectToAction("AfterLogin");
+                    //}
+
+                    if (user.Count() != 0)
                     {
-                        Session["LogedUserID"] = v.Id.ToString();
-                        Session["LogedUserFullname"] = v.Profil_name.ToString();
-                        if (v.Profil_name.ToString() == "admin")
-                        {
-                            return RedirectToAction("AfterLoginAdmin");
-                        }
+                        Session["LogedUserID"] = user.First();
                         return RedirectToAction("AfterLogin");
                     }
+                   
+
                 }
             }
             return View(u);
@@ -59,7 +72,7 @@ namespace Hanger.Controllers
         {
             if (Session["LogedUserID"] != null)
             {
-                return View();
+                return RedirectToAction("New","Ad");
             }
             else
             {

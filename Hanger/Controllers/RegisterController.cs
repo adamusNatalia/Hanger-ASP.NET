@@ -40,7 +40,7 @@ namespace Hanger.Controllers
               
                 {
                     U.Date_access = DateTime.Now;               
-                    db.User.Add(U);
+                    
                     db.SaveChanges();
                     ModelState.Clear();
                     U = null;
