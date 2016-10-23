@@ -12,24 +12,18 @@ namespace Hanger.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Subcategory
+    public partial class Brand
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Subcategory()
+        public Brand()
         {
             this.Ad = new HashSet<Ad>();
-            this.SubSubcategory = new HashSet<SubSubcategory>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public int CategoryId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ad> Ad { get; set; }
-        public virtual Category Category { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubSubcategory> SubSubcategory { get; set; }
     }
 }

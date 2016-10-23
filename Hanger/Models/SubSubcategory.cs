@@ -12,21 +12,13 @@ namespace Hanger.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Size
+    public partial class SubSubcategory
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Size()
-        {
-            this.Ad = new HashSet<Ad>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Uk_size { get; set; }
-        public string Nuber_size { get; set; }
+        public int SubcategoryId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ad> Ad { get; set; }
+        public virtual Subcategory Subcategory { get; set; }
     }
 }

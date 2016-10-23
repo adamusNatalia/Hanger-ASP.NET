@@ -27,12 +27,12 @@ namespace Hanger.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> Date_start { get; set; }
-        public string Brand_name { get; set; }
         public int SizeId { get; set; }
         public int ColorId { get; set; }
         public int SubcategoryId { get; set; }
         public int ConditionId { get; set; }
         public Nullable<bool> Swap { get; set; }
+        public Nullable<int> BrandId { get; set; }
     
         public virtual Condition Condition { get; set; }
         public virtual Size Size { get; set; }
@@ -43,5 +43,6 @@ namespace Hanger.Models
         public virtual ICollection<Photos> Photos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tags> Tags { get; set; }
+        public virtual Brand Brand { get; set; }
     }
 }

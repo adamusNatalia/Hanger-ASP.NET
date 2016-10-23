@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HangerDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HangerDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Ad">
           <Key>
             <PropertyRef Name="Id" />
@@ -15,12 +15,19 @@
           <Property Name="Title" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="255" />
           <Property Name="Date_start" Type="datetime" />
-          <Property Name="Brand_name" Type="varchar" MaxLength="255" />
+          <Property Name="BrandId" Type="int" />
           <Property Name="SizeId" Type="int" Nullable="false" />
           <Property Name="ColorId" Type="int" Nullable="false" />
           <Property Name="SubcategoryId" Type="int" Nullable="false" />
           <Property Name="ConditionId" Type="int" Nullable="false" />
           <Property Name="Swap" Type="bit" />
+        </EntityType>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -109,6 +116,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Uk_size" Type="varchar" MaxLength="50" />
+          <Property Name="Nuber_size" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Subcategory">
           <Key>
@@ -118,6 +127,15 @@
           <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="255" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubSubcategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="SubcategoryId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tags">
           <Key>
@@ -191,6 +209,18 @@
             </Principal>
             <Dependent Role="Ad">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAd584267">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+          <End Role="Ad" Type="Self.Ad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ad">
+              <PropertyRef Name="BrandId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -314,6 +344,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FKSubsubcate564795">
+          <End Role="Subcategory" Type="Self.Subcategory" Multiplicity="1" />
+          <End Role="SubSubcategory" Type="Self.SubSubcategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subcategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubSubcategory">
+              <PropertyRef Name="SubcategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKTags638329">
           <End Role="Ad" Type="Self.Ad" Multiplicity="1" />
           <End Role="Tags" Type="Self.Tags" Multiplicity="*" />
@@ -340,6 +382,7 @@
         </Association>
         <EntityContainer Name="HangerDatabaseModelStoreContainer">
           <EntitySet Name="Ad" EntityType="Self.Ad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Color" EntityType="Self.Color" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Condition" EntityType="Self.Condition" Schema="dbo" store:Type="Tables" />
@@ -351,6 +394,7 @@
           <EntitySet Name="PhotoSite" EntityType="Self.PhotoSite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subcategory" EntityType="Self.Subcategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubSubcategory" EntityType="Self.SubSubcategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPhoto" EntityType="Self.UserPhoto" Schema="dbo" store:Type="Tables" />
@@ -368,6 +412,10 @@
           </AssociationSet>
           <AssociationSet Name="FKAd515014" Association="Self.FKAd515014">
             <End Role="User" EntitySet="User" />
+            <End Role="Ad" EntitySet="Ad" />
+          </AssociationSet>
+          <AssociationSet Name="FKAd584267" Association="Self.FKAd584267">
+            <End Role="Brand" EntitySet="Brand" />
             <End Role="Ad" EntitySet="Ad" />
           </AssociationSet>
           <AssociationSet Name="FKAd594180" Association="Self.FKAd594180">
@@ -410,6 +458,10 @@
             <End Role="Category" EntitySet="Category" />
             <End Role="Subcategory" EntitySet="Subcategory" />
           </AssociationSet>
+          <AssociationSet Name="FKSubsubcate564795" Association="Self.FKSubsubcate564795">
+            <End Role="Subcategory" EntitySet="Subcategory" />
+            <End Role="SubSubcategory" EntitySet="SubSubcategory" />
+          </AssociationSet>
           <AssociationSet Name="FKTags638329" Association="Self.FKTags638329">
             <End Role="Ad" EntitySet="Ad" />
             <End Role="Tags" EntitySet="Tags" />
@@ -419,8 +471,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HangerDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -434,7 +485,6 @@
           <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Date_start" Type="DateTime" Precision="3" />
-          <Property Name="Brand_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="SizeId" Type="Int32" Nullable="false" />
           <Property Name="ColorId" Type="Int32" Nullable="false" />
           <Property Name="SubcategoryId" Type="Int32" Nullable="false" />
@@ -447,6 +497,8 @@
           <NavigationProperty Name="Subcategory" Relationship="Self.FKAd594180" FromRole="Ad" ToRole="Subcategory" />
           <NavigationProperty Name="Photos" Relationship="Self.FKPhotos129746" FromRole="Ad" ToRole="Photos" />
           <NavigationProperty Name="Tags" Relationship="Self.FKTags638329" FromRole="Ad" ToRole="Tags" />
+          <Property Name="BrandId" Type="Int32" />
+          <NavigationProperty Name="Brand" Relationship="HangerDatabaseModel.FKAd584267" FromRole="Ad" ToRole="Brand" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -550,6 +602,8 @@
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Ad" Relationship="Self.FKAd464028" FromRole="Size" ToRole="Ad" />
+          <Property Name="Uk_size" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nuber_size" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Subcategory">
           <Key>
@@ -561,6 +615,7 @@
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Ad" Relationship="Self.FKAd594180" FromRole="Subcategory" ToRole="Ad" />
           <NavigationProperty Name="Category" Relationship="Self.FKSubcategor437486" FromRole="Subcategory" ToRole="Category" />
+          <NavigationProperty Name="SubSubcategory" Relationship="HangerDatabaseModel.FKSubsubcate564795" FromRole="Subcategory" ToRole="SubSubcategory" />
         </EntityType>
         <EntityType Name="Tags">
           <Key>
@@ -869,7 +924,59 @@
             <End Role="UserPhoto" EntitySet="UserPhoto" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
+          <EntitySet Name="SubSubcategory" EntityType="HangerDatabaseModel.SubSubcategory" />
+          <AssociationSet Name="FKSubsubcate564795" Association="HangerDatabaseModel.FKSubsubcate564795">
+            <End Role="Subcategory" EntitySet="Subcategory" />
+            <End Role="SubSubcategory" EntitySet="SubSubcategory" />
+          </AssociationSet>
+          <EntitySet Name="Brand" EntityType="HangerDatabaseModel.Brand" />
+          <AssociationSet Name="FKAd584267" Association="HangerDatabaseModel.FKAd584267">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Ad" EntitySet="Ad" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="SubSubcategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SubcategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Subcategory" Relationship="HangerDatabaseModel.FKSubsubcate564795" FromRole="SubSubcategory" ToRole="Subcategory" />
+        </EntityType>
+        <Association Name="FKSubsubcate564795">
+          <End Type="HangerDatabaseModel.Subcategory" Role="Subcategory" Multiplicity="1" />
+          <End Type="HangerDatabaseModel.SubSubcategory" Role="SubSubcategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subcategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubSubcategory">
+              <PropertyRef Name="SubcategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ad" Relationship="HangerDatabaseModel.FKAd584267" FromRole="Brand" ToRole="Ad" />
+        </EntityType>
+        <Association Name="FKAd584267">
+          <End Type="HangerDatabaseModel.Brand" Role="Brand" Multiplicity="0..1" />
+          <End Type="HangerDatabaseModel.Ad" Role="Ad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ad">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -879,13 +986,13 @@
           <EntitySetMapping Name="Ad">
             <EntityTypeMapping TypeName="HangerDatabaseModel.Ad">
               <MappingFragment StoreEntitySet="Ad">
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Date_start" ColumnName="Date_start" />
-                <ScalarProperty Name="Brand_name" ColumnName="Brand_name" />
                 <ScalarProperty Name="SizeId" ColumnName="SizeId" />
                 <ScalarProperty Name="ColorId" ColumnName="ColorId" />
                 <ScalarProperty Name="SubcategoryId" ColumnName="SubcategoryId" />
@@ -986,6 +1093,8 @@
           <EntitySetMapping Name="Size">
             <EntityTypeMapping TypeName="HangerDatabaseModel.Size">
               <MappingFragment StoreEntitySet="Size">
+                <ScalarProperty Name="Nuber_size" ColumnName="Nuber_size" />
+                <ScalarProperty Name="Uk_size" ColumnName="Uk_size" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1029,6 +1138,24 @@
               <MappingFragment StoreEntitySet="UserPhoto">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubSubcategory">
+            <EntityTypeMapping TypeName="HangerDatabaseModel.SubSubcategory">
+              <MappingFragment StoreEntitySet="SubSubcategory">
+                <ScalarProperty Name="SubcategoryId" ColumnName="SubcategoryId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brand">
+            <EntityTypeMapping TypeName="HangerDatabaseModel.Brand">
+              <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
