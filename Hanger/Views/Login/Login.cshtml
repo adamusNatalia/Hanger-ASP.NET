@@ -1,47 +1,60 @@
 ﻿@model Hanger.Models.User
-
+@Styles.Render("~/css/account.css")
 @{
     ViewBag.Title = "Login";
 }
 
 <h2>Login</h2>
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>User</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        <div class="form-group">
-            @Html.LabelFor(model => model.Profil_name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Profil_name)
-                @Html.ValidationMessageFor(model => model.Profil_name)
-            </div>
-        </div>
 
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password)
-                @Html.ValidationMessageFor(model => model.Password)
-            </div>
-        </div>
+    @Html.ValidationSummary(true)
 
-        
-       
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+    <div id="login-overlay" class="modal-dialog">
+        <div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="well">
+                            <form id="loginForm" method="POST" action="/login/" novalidate="novalidate">
+                                <div class="form-group">
+                                    <label for="Profil_name" class="control-label">Nazwa profilu</label>
+                                    @Html.EditorFor(model => model.Profil_name)
+                                    @Html.ValidationMessageFor(model => model.Profil_name)
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="Password" class="control-label">Hasło</label>
+                                    @Html.EditorFor(model => model.Password)
+                                    @Html.ValidationMessageFor(model => model.Password)
+                                </div>
+                                
+                                <input type="submit" value="Zaloguj się" class="btn btn-default" />
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <p class="lead">Nie masz konta?<br/><span class="text-success">ZAREJESTRUJ SIĘ</span></p> 
+                        <ul class="list-unstyled" style="line-height: 2">
+                            <li><span class="fa fa-check text-success"></span> Dodawaj nieskończoną ilość ogłoszeń </li>
+                            <li><span class="fa fa-check text-success"></span> Wymieniaj się z innymi ubraniami</li>     
+                            <li><span class="fa fa-check text-success"></span> Inspiruj innych swoim stylem</li>
+                        </ul> 
+                        <p><a href="/new-customer/" class="btn btn-info btn-block">Zarejestruj się już teraz!</a></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-}
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/js/account.js"></script>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+}

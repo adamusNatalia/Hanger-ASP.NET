@@ -243,6 +243,7 @@
     <Compile Include="ViewModels\AccountViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\account.css" />
     <Content Include="css\bootstrap-theme.css" />
     <Content Include="css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap.css" />
@@ -253,6 +254,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="js\account.js" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="Models\ModelHanger.Context.tt">
@@ -268,14 +270,17 @@
     <Content Include="Pictures\hanger_logo.png" />
     <Content Include="Pictures\hanger_logo2.png" />
     <Content Include="Pictures\hanger_logo50.png" />
+    <Content Include="Pictures\Home\2slide.jpg" />
     <Content Include="Pictures\Home\8.jpg" />
     <Content Include="Pictures\Home\8blue.jpg" />
+    <Content Include="Pictures\Home\8blue2.jpg" />
     <Content Include="Pictures\Home\first_slide.png" />
     <Content Include="Pictures\Home\6_pop_small.png" />
     <Content Include="Pictures\Home\slide.png" />
     <Content Include="Pictures\Home\slide3.jpg" />
     <Content Include="Pictures\Home\slide2.jpg" />
     <Content Include="Pictures\Home\slider1.jpg" />
+    <Content Include="Pictures\Login\icon2.png" />
     <Content Include="Pictures\logo.png" />
     <EntityDeploy Include="Models\ModelHanger.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
