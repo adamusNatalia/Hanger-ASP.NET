@@ -251,12 +251,14 @@
     <Content Include="css\carousel.css" />
     <Content Include="css\img.css" />
     <Content Include="css\register.css" />
+    <Content Include="css\tiles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="js\account.js" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\tiles.js" />
     <Content Include="Models\ModelHanger.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelHanger.edmx</DependentUpon>
@@ -313,6 +315,7 @@
     <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Ad\New.cshtml" />
+    <Content Include="Views\Ad\Tiles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

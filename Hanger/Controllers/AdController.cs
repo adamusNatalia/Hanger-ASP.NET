@@ -97,5 +97,15 @@ namespace Hanger.Controllers
                             select d;
             ViewBag.SubcategoryId = new SelectList(sizeQuery, "Id", "Name", selectedSubcategory);
         }
-    }
+
+        public ActionResult Tiles()
+            {
+                ViewBag.Title = "Hanger";
+                return View();
+            }
+
 }
+
+    }
+
+    
