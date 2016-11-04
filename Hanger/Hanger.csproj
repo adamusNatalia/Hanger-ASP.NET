@@ -248,8 +248,10 @@
     <Content Include="css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\card.css" />
     <Content Include="css\carousel.css" />
     <Content Include="css\img.css" />
+    <Content Include="css\new.css" />
     <Content Include="css\register.css" />
     <Content Include="css\tiles.css" />
     <Content Include="favicon.ico" />
@@ -272,6 +274,7 @@
     <Content Include="Pictures\hanger_logo.png" />
     <Content Include="Pictures\hanger_logo2.png" />
     <Content Include="Pictures\hanger_logo50.png" />
+    <Content Include="Pictures\hmprod.jpg" />
     <Content Include="Pictures\Home\2slide.jpg" />
     <Content Include="Pictures\Home\8.jpg" />
     <Content Include="Pictures\Home\8blue.jpg" />
@@ -316,6 +319,9 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Ad\New.cshtml" />
     <Content Include="Views\Ad\Tiles.cshtml" />
+    <Content Include="Views\Ad\Details.cshtml" />
+    <Content Include="Views\Login\List.cshtml" />
+    <Content Include="Views\Home\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

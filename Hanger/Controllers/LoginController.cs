@@ -14,6 +14,16 @@ namespace Hanger.Controllers
         {
             return View();
         }
+
+        public ActionResult List()
+        {
+            var users = from s in db.User
+                           select s;
+
+            return View(users.ToList());
+        }
+
+
         public ActionResult Login()
         {
             if (Session["LogedUserID"] == null)

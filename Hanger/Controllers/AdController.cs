@@ -104,7 +104,17 @@ namespace Hanger.Controllers
                 return View();
             }
 
-}
+        public ActionResult Details()
+        {
+            var ad = from s in db.Ad
+                        select s;
+
+            return View(ad.ToList());
+        }
+
+
+
+    }
 
     }
 
