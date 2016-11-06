@@ -20,6 +20,7 @@ namespace Hanger.Models
         public string FIle_name { get; set; }
         public Nullable<bool> Main_photo { get; set; }
         public Nullable<int> PhotoSiteId { get; set; }
+        public string Type { get; set; }
     
         public virtual Ad Ad { get; set; }
         public virtual PhotoSite PhotoSite { get; set; }

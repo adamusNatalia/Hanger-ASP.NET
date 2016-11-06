@@ -39,7 +39,7 @@
     <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div>
 
-<div id="wrapper">
+@*<div id="wrapper">
     <div id="columns">
         @foreach (var item in Model)
         {
@@ -61,4 +61,113 @@
 
         }
     </div>
+</div>*@
+
+
+<div id="wrapper">
+    <div id="columns">
+        @{ int j = Model.Count() - 1;}
+
+        @for (int i = 0; i < 8; i++)
+        {
+
+            <a href="@Url.Action("Details", "Ad", new { id =  Model.ElementAt(j).Id })" class="navbar-left">
+                <div class="pin">
+                    @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
+                    {
+                        if (item.AdId == Model.ElementAt(j).Id && item.Main_photo == true)
+                        {
+
+                            <img src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))" /><br />
+
+                        }
+
+                    }
+                    <p class="alignleft">
+
+                        <b>@Html.DisplayFor(p => p.ElementAt(j).Brand.Name)</b>
+                    </p>
+                    <p class="alignright">
+
+                        <b> @Html.DisplayFor(p => p.ElementAt(j).Price) zł</b>
+                    </p>
+                    <p class="right">
+
+                        <b>@Html.DisplayFor(p => p.ElementAt(j).Size.Name)</b>
+                    </p>
+                </div>
+</a>
+                j--;
+
+                }
 </div>
+</div>
+
+
+@*<div class="business-header">
+    <div class="intro-content">
+
+        <h1>Zacznij już dziś!</h1>
+        <h2>Dołącz do nas.</h2>
+        <p><a class="btn btn-lg btn-primary" href="#" role="button">Zarejestruj się</a></p>
+
+    </div>
+</div>*@
+
+
+<div class="banner">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Dołącz do nas!</h2>
+            </div>
+            <div class="col-lg-6">
+                <ul class="list-inline banner-social-buttons">
+                    <li>
+                        <a href="/Login/Login" class="btn btn-default btn-lg">Zaloguj się</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/Register/Register" class="btn btn-default btn-lg">Zarejestruj się</a>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+</div>
+
+<div id="wrapper">
+    <div id="columns">
+        @{ int k = Model.Count() - 1;}
+
+        @for (int i = 0; i < 8; i++)
+        {
+            <div class="pin">
+                <img src="~/Pictures/hmprod.jpg" />
+                <p class="alignleft">
+
+                    <b>@Html.DisplayFor(p => p.ElementAt(j).Brand.Name)</b>
+                </p>
+                <p class="alignright">
+
+                    <b> @Html.DisplayFor(p => p.ElementAt(j).Price) zł</b>
+                </p>
+                <p class="right">
+
+                    <b>@Html.DisplayFor(p => p.ElementAt(j).Size.Name)</b>
+                </p>
+            </div>
+
+            k--;
+
+        }
+    </div>
+</div>
+
+<script src="~/js/card.js"></script>

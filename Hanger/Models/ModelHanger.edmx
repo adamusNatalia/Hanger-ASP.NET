@@ -101,6 +101,7 @@
           <Property Name="FIle_name" Type="varchar" MaxLength="255" />
           <Property Name="Main_photo" Type="bit" />
           <Property Name="PhotoSiteId" Type="int" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PhotoSite">
           <Key>
@@ -585,6 +586,7 @@
           <Property Name="PhotoSiteId" Type="Int32" />
           <NavigationProperty Name="Ad" Relationship="Self.FKPhotos129746" FromRole="Photos" ToRole="Ad" />
           <NavigationProperty Name="PhotoSite" Relationship="Self.FKPhotos982370" FromRole="Photos" ToRole="PhotoSite" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PhotoSite">
           <Key>
@@ -1073,6 +1075,7 @@
           <EntitySetMapping Name="Photos">
             <EntityTypeMapping TypeName="HangerDatabaseModel.Photos">
               <MappingFragment StoreEntitySet="Photos">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="AdId" ColumnName="AdId" />

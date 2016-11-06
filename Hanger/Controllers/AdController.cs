@@ -17,6 +17,14 @@ namespace Hanger.Controllers
             return View();
         }
 
+        public ActionResult Details(int Id)
+        {
+            Ad advertisement = db.Ad.Find(Id);
+            return View(advertisement);
+        }
+
+
+
         public ActionResult New()
         {
             SizeDropDownList();
@@ -104,7 +112,7 @@ namespace Hanger.Controllers
                 return View();
             }
 
-        public ActionResult Details()
+        public ActionResult Details2()
         {
             var ad = from s in db.Ad
                         select s;

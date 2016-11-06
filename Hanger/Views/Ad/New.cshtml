@@ -6,13 +6,14 @@
 
 <h2>New</h2>
 
-@using (Html.BeginForm()) 
-{
+@using (Html.BeginForm())
+{    if (Session["LogedUserID"] != null)
+    {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         @if (Session["LogedUserID"] != null)
-                {
+        {
             <small>
                 Hello @(((Session["LogedUserID"] as Hanger.Models.User).Profil_name) )
 
@@ -21,6 +22,22 @@
         <hr />
         @Html.ValidationSummary(true)
     
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header"><span class="glyphicon glyphicon-camera"></span> Add picture</h1>
+                @using (Html.BeginForm("SubmitPhoto", "Wall", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="row">
+                        <input type="file" name="file" class="btn btn-default" />
+                    </div>
+                    <div class="row">
+                        <input type="submit" value="Submit" class="btn btn-default" />
+                        <img id="loader" src="~/pic/ajax-loader.gif" style="display:none;" />
+                    </div>
+                }
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -101,8 +118,23 @@
             </div>
         </div>
     </div>
-}
+                }
+                else
+                {
+                   
+                        <div class="col-xs-6">
+                         Nie jesteś zalogowany
+                        <p class="lead">Nie masz konta?<br/><span class="text-success">ZAREJESTRUJ SIĘ</span></p> 
+                        <ul class="list-unstyled" style="line-height: 2">
+                            <li><span class="fa fa-check text-success"></span> Dodawaj nieskończoną ilość ogłoszeń</li>
+                            <li><span class="fa fa-check text-success"></span> Wymieniaj się z innymi ubraniami</li>     
+                            <li><span class="fa fa-check text-success"></span> Inspiruj innych swoim stylem</li>
+                        </ul> 
+                        <p><a href = "/Login/Login" class="btn btn-info btn-block">Zarejestruj się już teraz!</a></p>
+                    </div>
 
+    }
+}
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="HangerDatabaseModel.ForumTopic" Width="1.5" PointX="8.25" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HangerDatabaseModel.Message" Width="1.5" PointX="5.25" PointY="20.5" IsExpanded="true" />
         <EntityTypeShape EntityType="HangerDatabaseModel.Photos" Width="1.5" PointX="7.5" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="HangerDatabaseModel.PhotoSite" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HangerDatabaseModel.PhotoSite" Width="1.5" PointX="11.625" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="HangerDatabaseModel.Size" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HangerDatabaseModel.Subcategory" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="HangerDatabaseModel.Tags" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />

@@ -260,6 +260,7 @@
     <Content Include="js\account.js" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\card.js" />
     <Content Include="js\tiles.js" />
     <Content Include="Models\ModelHanger.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -271,6 +272,9 @@
       <DependentUpon>ModelHanger.edmx</DependentUpon>
       <LastGenOutput>ModelHanger.cs</LastGenOutput>
     </Content>
+    <Content Include="Pictures\4a.jpg" />
+    <Content Include="Pictures\6.jpg" />
+    <Content Include="Pictures\6_pop_small.png" />
     <Content Include="Pictures\hanger_logo.png" />
     <Content Include="Pictures\hanger_logo2.png" />
     <Content Include="Pictures\hanger_logo50.png" />
@@ -319,9 +323,10 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Ad\New.cshtml" />
     <Content Include="Views\Ad\Tiles.cshtml" />
-    <Content Include="Views\Ad\Details.cshtml" />
+    <Content Include="Views\Ad\Details2.cshtml" />
     <Content Include="Views\Login\List.cshtml" />
     <Content Include="Views\Home\New.cshtml" />
+    <Content Include="Views\Ad\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
