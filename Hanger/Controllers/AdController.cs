@@ -23,7 +23,11 @@ namespace Hanger.Controllers
             return View(advertisement);
         }
 
-
+        public ActionResult Photo()
+        {
+          
+            return View();
+        }
 
         public ActionResult New()
         {
@@ -65,7 +69,8 @@ namespace Hanger.Controllers
             SubcategoryDropDownList(A.SubcategoryId);
 
 
-            return View(A);
+            //return View(A);
+            return RedirectToAction("Photo", "Ad");
         }
 
         private void SizeDropDownList(object selectedSize = null)
@@ -119,8 +124,179 @@ namespace Hanger.Controllers
 
             return View(ad.ToList());
         }
+        public ActionResult FrontPhoto()
+        {
+            HttpPostedFileBase file = Request.Files[0];
+            byte[] imageSize = new byte[file.ContentLength];
+            file.InputStream.Read(imageSize, 0, (int)file.ContentLength);
 
 
+            using (HangerDatabase db = new HangerDatabase())
+            {
+                Photos p = new Photos();
+                p.Photo = imageSize;
+                p.FIle_name = file.FileName;
+
+                if (db.Photos != null && db.Photos.Count() != 0)
+                {
+                    p.Id = (from ph in db.Photos
+                                 select ph.Id).Max() + 1;
+                }
+                else
+                    p.Id = 0;
+
+               // p.OwnerId = (Session["CurrentUserEmail"] as User).UserId;
+                p.AdId= (from ad in db.Ad
+                         select ad.Id).Max();
+                p.Type = file.ContentType;
+                db.Photos.Add(p);
+                db.SaveChanges();
+            }
+
+            //return RedirectToAction("New", "Home");
+            return RedirectToAction("Photo", "Ad");
+        }
+
+
+        public ActionResult MainPhoto()
+        {
+            HttpPostedFileBase file = Request.Files[0];
+            byte[] imageSize = new byte[file.ContentLength];
+            file.InputStream.Read(imageSize, 0, (int)file.ContentLength);
+
+
+            using (HangerDatabase db = new HangerDatabase())
+            {
+                Photos p = new Photos();
+                p.Photo = imageSize;
+                p.FIle_name = file.FileName;
+
+                if (db.Photos != null && db.Photos.Count() != 0)
+                {
+                    p.Id = (from ph in db.Photos
+                            select ph.Id).Max() + 1;
+                }
+                else
+                    p.Id = 0;
+
+                // p.OwnerId = (Session["CurrentUserEmail"] as User).UserId;
+                p.AdId = (from ad in db.Ad
+                          select ad.Id).Max();
+                p.Type = file.ContentType;
+                p.Main_photo = true;
+                p.PhotoSiteId = 1;
+                db.Photos.Add(p);
+                db.SaveChanges();
+            }
+
+            //return RedirectToAction("New", "Home");
+            return RedirectToAction("Photo", "Ad");
+        }
+        public ActionResult ModelPhoto()
+        {
+            HttpPostedFileBase file = Request.Files[0];
+            byte[] imageSize = new byte[file.ContentLength];
+            file.InputStream.Read(imageSize, 0, (int)file.ContentLength);
+
+
+            using (HangerDatabase db = new HangerDatabase())
+            {
+                Photos p = new Photos();
+                p.Photo = imageSize;
+                p.FIle_name = file.FileName;
+
+                if (db.Photos != null && db.Photos.Count() != 0)
+                {
+                    p.Id = (from ph in db.Photos
+                            select ph.Id).Max() + 1;
+                }
+                else
+                    p.Id = 0;
+
+                // p.OwnerId = (Session["CurrentUserEmail"] as User).UserId;
+                p.AdId = (from ad in db.Ad
+                          select ad.Id).Max();
+                p.Type = file.ContentType;
+                p.Main_photo = false;
+                p.PhotoSiteId = 2;
+                db.Photos.Add(p);
+                db.SaveChanges();
+            }
+            //return RedirectToAction("New", "Home");
+            return RedirectToAction("Photo", "Ad");
+        }
+
+
+
+        public ActionResult ZoomPhoto()
+        {
+            HttpPostedFileBase file = Request.Files[0];
+            byte[] imageSize = new byte[file.ContentLength];
+            file.InputStream.Read(imageSize, 0, (int)file.ContentLength);
+
+
+            using (HangerDatabase db = new HangerDatabase())
+            {
+                Photos p = new Photos();
+                p.Photo = imageSize;
+                p.FIle_name = file.FileName;
+
+                if (db.Photos != null && db.Photos.Count() != 0)
+                {
+                    p.Id = (from ph in db.Photos
+                            select ph.Id).Max() + 1;
+                }
+                else
+                    p.Id = 0;
+
+                // p.OwnerId = (Session["CurrentUserEmail"] as User).UserId;
+                p.AdId = (from ad in db.Ad
+                          select ad.Id).Max();
+                p.Type = file.ContentType;
+                p.Main_photo = false;
+                p.PhotoSiteId = 3;
+                db.Photos.Add(p);
+                db.SaveChanges();
+            }
+
+            //return RedirectToAction("New", "Home");
+            return RedirectToAction("Photo", "Ad");
+        }
+
+        public ActionResult BackPhoto()
+        {
+            HttpPostedFileBase file = Request.Files[0];
+            byte[] imageSize = new byte[file.ContentLength];
+            file.InputStream.Read(imageSize, 0, (int)file.ContentLength);
+
+
+            using (HangerDatabase db = new HangerDatabase())
+            {
+                Photos p = new Photos();
+                p.Photo = imageSize;
+                p.FIle_name = file.FileName;
+
+                if (db.Photos != null && db.Photos.Count() != 0)
+                {
+                    p.Id = (from ph in db.Photos
+                            select ph.Id).Max() + 1;
+                }
+                else
+                    p.Id = 0;
+
+                // p.OwnerId = (Session["CurrentUserEmail"] as User).UserId;
+                p.AdId = (from ad in db.Ad
+                          select ad.Id).Max();
+                p.Type = file.ContentType;
+                p.Main_photo = false;
+                p.PhotoSiteId = 4;
+                db.Photos.Add(p);
+                db.SaveChanges();
+            }
+
+            //return RedirectToAction("New", "Home");
+            return RedirectToAction("Photo", "Ad");
+        }
 
     }
 

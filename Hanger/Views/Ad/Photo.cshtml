@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Photo";
+}
+
+<h2>Photo</h2>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><span class="glyphicon glyphicon-camera"></span> Add picture</h1>
+        @using (Html.BeginForm("MainPhoto", "Ad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <input type="file" name="file" class="btn btn-default" />
+            </div>
+                    <div class="row">
+                        <input type="submit" value="Submit" class="btn btn-default" />
+                        <img id="loader" src="~/pic/ajax-loader.gif" style="display:none;" />
+                    </div>
+        }
+
+
+        @using (Html.BeginForm("ModelPhoto", "Ad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <input type="file" name="file" class="btn btn-default" />
+            </div>
+            <div class="row">
+                <input type="submit" value="Submit" class="btn btn-default" />
+                <img id="loader" src="~/pic/ajax-loader.gif" style="display:none;" />
+            </div>
+        }
+
+        @using (Html.BeginForm("BackPhoto", "Ad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <input type="file" name="file" class="btn btn-default" />
+            </div>
+            <div class="row">
+                <input type="submit" value="Submit" class="btn btn-default" />
+                <img id="loader" src="~/pic/ajax-loader.gif" style="display:none;" />
+            </div>
+        }
+
+        @using (Html.BeginForm("ZoomPhoto", "Ad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <input type="file" name="file" class="btn btn-default" />
+            </div>
+            <div class="row">
+                <input type="submit" value="Submit" class="btn btn-default" />
+                <img id="loader" src="~/pic/ajax-loader.gif" style="display:none;" />
+            </div>
+        }
+        
+    </div>
+</div>
