@@ -23,6 +23,11 @@ namespace Hanger.Controllers
             return View(advertisement);
         }
 
+        public ActionResult Product(int Id)
+        {
+            Ad advertisement = db.Ad.Find(Id);
+            return View(advertisement);
+        }
         public ActionResult Photo()
         {
           

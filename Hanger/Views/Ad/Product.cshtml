@@ -1,0 +1,136 @@
+﻿@model Hanger.Models.Ad
+
+@{
+    ViewBag.Title = "Product";
+}
+@Styles.Render("~/css/style.css")
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css" />
+    <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis' rel='stylesheet' type='text/css'>
+    <!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it -->
+    <!--[if IE]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.13.custom.min.js"></script>
+    <script type="text/javascript">
+	$(function(){
+		// Tabs
+		$('#tabs').tabs();
+	});
+    </script>
+</head>
+<body>
+    <article id="mainview">
+        <div id="breadcrumb"><a href="index.html">Home</a> > <a href="search.html">Dresses</a> > <a href="search.html">Summer Dress</a> > Summer Dress</div>
+        <div id="description">
+            <h1>@Html.DisplayFor(model => model.Title)</h1>
+            <strong id="price">@Html.DisplayFor(model => model.Price) zł</strong>
+            <p>@Html.DisplayFor(model => model.Description) </p>
+            <div>
+                <div class="details-list__item-title">
+                    <strong id="info"><span class="title">Marka  </span></strong>
+                </div>
+
+                <div class="details-list__item-value">
+                    <strong id="info"><span class="color">@Html.DisplayFor(model => model.Brand.Name)</span></strong>
+                </div>
+                <div class="details-list__item-title">
+                    <strong id="info"><span class="title">Rozmiar  </span></strong>
+                </div>
+
+                <div class="details-list__item-value">
+                    <strong id="info"><span class="color">@Html.DisplayFor(model => model.Size.Name)</span></strong>
+                </div>
+                <div class="details-list__item-title">
+                    <strong id="info"><span class="title">Stan  </span></strong>
+                </div>
+
+                <div class="details-list__item-value">
+                    <strong id="info"><span class="color">@Html.DisplayFor(model => model.Condition.Name)</span></strong>
+                </div>
+                <div class="details-list__item-title">
+                    <strong id="info"><span class="title">Kolor  </span></strong>
+                </div>
+
+                <div class="details-list__item-value">
+                    <strong id="info"><span class="color">@Html.DisplayFor(model => model.Color.Name)</span></strong>
+                </div>
+                <div class="details-list__item-title">
+                <strong id="info"><span class="title">Kategoria  </span></strong>
+                </div>
+
+                <div class="details-list__item-value">
+                    <strong id="info"><span class="color">@Html.DisplayFor(model => model.Subcategory.Name)</span></strong>
+                  </div>
+
+                <div class="details-list__item-title">
+                    <strong id="info"><span class="title">Możliwość wymiany  </span></strong>
+                </div>
+
+                <div class="details-list__item-value">
+
+                   @if (HttpUtility.HtmlEncode(@Html.DisplayFor(model => model.Price)) == "true")
+                    {
+                        <strong id="info"><span class="color"></span></strong>
+                   }
+                   else
+                   {
+                        <strong id="info"><span class="color">Nie</span></strong>
+                   }
+
+                 </div>
+                <div class="details-list__item-title">
+                    <strong id="info"><span class="title">Użytkownik  </span></strong>
+                </div>
+
+                <div class="details-list__item-value">
+                    <strong id="info"><span class="color">@Html.DisplayFor(model => model.User.Profil_name)</span></strong>
+                </div>
+  
+           </div>
+            <p><a href="/Register/Register" class="btn btn-info btn-block">Wyślij wiadomość</a></p>
+
+            <p class="date"><span class="date">Data dodadnia: @Html.DisplayFor(model => model.Date_start)</span> </p>
+               
+               
+</div>
+        <div id="images">
+            @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
+            {
+                if (item.AdId == 22 && item.Main_photo == true)
+                {
+
+                    <img src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))"  height="550"/><br />
+
+                }
+
+            }
+            <p>Rollover to zoom. Click to enlarge.</p>
+            <span class="sale">Sale</span>
+            <div id="productthumbs">
+                @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
+            {
+                if (item.AdId == 22) 
+                {
+                        <a href="#">
+
+                        <img src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))" width="150" />
+                        </a>
+
+                    }
+
+                }
+               
+            
+             </div>
+        </div>
+    </article>
+
+</body>
+</html>

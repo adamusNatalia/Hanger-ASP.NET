@@ -166,6 +166,7 @@
     <Compile Include="Controllers\AdController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\UserProfilController.cs" />
     <Compile Include="Global.asax.cs">
@@ -253,6 +254,7 @@
     <Content Include="css\img.css" />
     <Content Include="css\new.css" />
     <Content Include="css\register.css" />
+    <Content Include="css\style.css" />
     <Content Include="css\tiles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -328,6 +330,9 @@
     <Content Include="Views\Home\New.cshtml" />
     <Content Include="Views\Ad\Details.cshtml" />
     <Content Include="Views\Ad\Photo.cshtml" />
+    <Content Include="Views\Mail\EmailRequest.cshtml" />
+    <Content Include="Views\Mail\ProcessRequest.cshtml" />
+    <Content Include="Views\Ad\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
