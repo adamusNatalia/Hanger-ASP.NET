@@ -20,6 +20,7 @@ namespace Hanger.Models
         public string Title { get; set; }
         public string Context { get; set; }
         public System.DateTime Date { get; set; }
+        public string Mail { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

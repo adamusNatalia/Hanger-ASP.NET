@@ -6,6 +6,7 @@
 <h2>ProcessRequest</h2>
 
 @{
+    
     var customerName = Request["customerName"];
     var customerEmail = Request["customerEmail"];
     var customerRequest = Request["customerRequest"];
@@ -15,7 +16,7 @@
     {
         // Initialize WebMail helper
         WebMail.SmtpServer = "smtp.gmail.com";
-        WebMail.SmtpPort = 465;
+        WebMail.SmtpPort = 587;
         WebMail.UserName = "hanger.natalia@gmail.com";
         WebMail.Password = "hangertest";
         WebMail.From = "hanger.natalia@gmail.com";
@@ -23,6 +24,8 @@
 
         // Send email
         WebMail.Send(to: customerEmail,
+
+
     subject: "Help request from - " + customerName,
     body: customerRequest
 );

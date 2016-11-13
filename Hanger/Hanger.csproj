@@ -251,6 +251,7 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\card.css" />
     <Content Include="css\carousel.css" />
+    <Content Include="css\contact.css" />
     <Content Include="css\img.css" />
     <Content Include="css\new.css" />
     <Content Include="css\register.css" />
@@ -263,6 +264,10 @@
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\card.js" />
+    <Content Include="js\contact.js" />
+    <Content Include="js\jquery-1.6.js" />
+    <Content Include="js\jquery.jqzoom-core-pack.js" />
+    <Content Include="js\jquery.jqzoom-core.js" />
     <Content Include="js\tiles.js" />
     <Content Include="Models\ModelHanger.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -274,7 +279,13 @@
       <DependentUpon>ModelHanger.edmx</DependentUpon>
       <LastGenOutput>ModelHanger.cs</LastGenOutput>
     </Content>
-    <Content Include="Pictures\4a.jpg" />
+    <Content Include="Pictures\Icons\avatar.png" />
+    <Content Include="Pictures\Icons\close.png" />
+    <Content Include="Pictures\Icons\envelope.png" />
+    <Content Include="Pictures\Icons\error.png" />
+    <Content Include="Pictures\Icons\pen.png" />
+    <Content Include="Pictures\Icons\user.png" />
+    <Content Include="Pictures\Login\4a.jpg" />
     <Content Include="Pictures\6.jpg" />
     <Content Include="Pictures\6_pop_small.png" />
     <Content Include="Pictures\hanger_logo.png" />
@@ -301,6 +312,7 @@
       <DependentUpon>ModelHanger.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Pictures\user.png" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -333,6 +345,7 @@
     <Content Include="Views\Mail\EmailRequest.cshtml" />
     <Content Include="Views\Mail\ProcessRequest.cshtml" />
     <Content Include="Views\Ad\Product.cshtml" />
+    <Content Include="Views\Mail\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

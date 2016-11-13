@@ -5,6 +5,8 @@
 }
 @Styles.Render("~/css/style.css")
 
+@Styles.Render("~/css/contact.css")
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,13 +77,13 @@
 
                 <div class="details-list__item-value">
 
-                   @if (HttpUtility.HtmlEncode(@Html.DisplayFor(model => model.Price)) == "true")
+                   @if (HttpUtility.HtmlEncode(@Html.DisplayFor(model => model.Swap)) == "true")
                     {
-                        <strong id="info"><span class="color"></span></strong>
+                        <strong id="info"><span class="color">Tak</span></strong>
                    }
                    else
                    {
-                        <strong id="info"><span class="color">Nie</span></strong>
+                        <strong id="info"><span class="color">Brak możliwości</span></strong>
                    }
 
                  </div>
@@ -94,16 +96,44 @@
                 </div>
   
            </div>
-            <p><a href="/Register/Register" class="btn btn-info btn-block">Wyślij wiadomość</a></p>
 
-            <p class="date"><span class="date">Data dodadnia: @Html.DisplayFor(model => model.Date_start)</span> </p>
+            <button id="popup" onclick="div_show()" class="btn btn-default">Wyślij wiadomość</button>
+           
+           
+
+            <div id="abc">
+                <!-- Popup Div Starts Here -->
+                <div id="popupContact">
+                    <!-- Contact Us Form -->
+           
+                    @using (Html.BeginForm("SendMail2", "Ad", new { to = @Html.DisplayFor(model => model.User.Profil_name), id = @Html.DisplayFor(model => model.Id) }, FormMethod.Post))
+                    { <form action="#" id="form" method="post" name="form">
+                        <img id="close" src="~/Pictures/Icons/close.png" onclick="div_hide()">
+                        <h2>Wyślij wiadomość</h2>
+                        <hr>
+                        <input id="name" name="subject" placeholder="Temat" type="text">
+                        <input id="email" name="email" placeholder="Email" type="text">
+                        <textarea id="msg" name="body" placeholder="Wiadomość"></textarea>
+                          
+                        <input onclick="check_empty()" type="submit" class="btn" value="Wyślij" />
+                   
+                        @*<p><button class="btn btn-lg btn-success btn-block" type="submit" onclick="location.href='@Url.Action("SendMail", "Ad")'">Wyślij</button></p>*@
+                    </form>
+                    }
+                </div>
+                <!-- Popup Div Ends Here -->
+            </div>
+            <!-- Display Popup Button -->
+
+
+
                
                
 </div>
         <div id="images">
             @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
             {
-                if (item.AdId == 22 && item.Main_photo == true)
+                if (item.AdId == Model.Id && item.Main_photo == true)
                 {
 
                     <img src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))"  height="550"/><br />
@@ -111,12 +141,12 @@
                 }
 
             }
-            <p>Rollover to zoom. Click to enlarge.</p>
-            <span class="sale">Sale</span>
+           
+            
             <div id="productthumbs">
                 @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
             {
-                if (item.AdId == 22) 
+                if (item.AdId == Model.Id) 
                 {
                         <a href="#">
 
@@ -134,3 +164,9 @@
 
 </body>
 </html>
+
+
+<script src="~/js/contact.js"></script>
+
+<script src="../js/jquery-1.6.js" type="text/javascript"></script>
+<script src="../js/jquery.jqzoom-core.js" type="text/javascript"></script>

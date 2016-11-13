@@ -90,6 +90,7 @@
           <Property Name="Title" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Context" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Photos">
           <Key>
@@ -573,6 +574,7 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="User" Relationship="Self.FKMessage241730" FromRole="Message" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Self.FKMessage63833" FromRole="Message" ToRole="User" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Photos">
           <Key>
@@ -1063,6 +1065,7 @@
           <EntitySetMapping Name="Message">
             <EntityTypeMapping TypeName="HangerDatabaseModel.Message">
               <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId2" ColumnName="UserId2" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
