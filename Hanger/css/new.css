@@ -160,6 +160,7 @@ p.left {
 	-moz-transition: all .2s ease;
 	-o-transition: all .2s ease;
 	transition: all .2s ease;
+    break-inside: avoid-column;
 }
 
 .pin img {
@@ -193,4 +194,24 @@ p.left {
 
 #columns:hover .pin:not(:hover) {
 	opacity: 0.4;
+}
+
+select {
+    
+    height: 29px;
+    overflow: hidden;
+    border-radius: 5px;
+    color: #dc679a;
+    border: 1px solid #dc679a;
+}
+
+label{
+    color:#999999;
+    padding-left:5px;
+    margin-bottom:0px;
+    font-weight:normal;
+}
+
+table{
+    margin-left:20%;
 }

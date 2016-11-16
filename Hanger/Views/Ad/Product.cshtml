@@ -7,29 +7,23 @@
 
 @Styles.Render("~/css/contact.css")
 
+<style>
+    nav {
+    display:inline-block;
+    vertical-align: middle;
+    width:150px;
+    }
+    a{
+        display:block;
+    }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="css/style.css" />
-    <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis' rel='stylesheet' type='text/css'>
-    <!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it -->
-    <!--[if IE]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui-1.8.13.custom.min.js"></script>
-    <script type="text/javascript">
-	$(function(){
-		// Tabs
-		$('#tabs').tabs();
-	});
-    </script>
-</head>
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+
 <body>
     <article id="mainview">
-        <div id="breadcrumb"><a href="index.html">Home</a> > <a href="search.html">Dresses</a> > <a href="search.html">Summer Dress</a> > Summer Dress</div>
+        
         <div id="description">
             <h1>@Html.DisplayFor(model => model.Title)</h1>
             <strong id="price">@Html.DisplayFor(model => model.Price) zł</strong>
@@ -64,12 +58,12 @@
                     <strong id="info"><span class="color">@Html.DisplayFor(model => model.Color.Name)</span></strong>
                 </div>
                 <div class="details-list__item-title">
-                <strong id="info"><span class="title">Kategoria  </span></strong>
+                    <strong id="info"><span class="title">Kategoria  </span></strong>
                 </div>
 
                 <div class="details-list__item-value">
                     <strong id="info"><span class="color">@Html.DisplayFor(model => model.Subcategory.Name)</span></strong>
-                  </div>
+                </div>
 
                 <div class="details-list__item-title">
                     <strong id="info"><span class="title">Możliwość wymiany  </span></strong>
@@ -77,16 +71,16 @@
 
                 <div class="details-list__item-value">
 
-                   @if (HttpUtility.HtmlEncode(@Html.DisplayFor(model => model.Swap)) == "true")
+                    @if (HttpUtility.HtmlEncode(@Html.DisplayFor(model => model.Swap)) == "true")
                     {
                         <strong id="info"><span class="color">Tak</span></strong>
-                   }
-                   else
-                   {
+                    }
+                    else
+                    {
                         <strong id="info"><span class="color">Brak możliwości</span></strong>
-                   }
+                    }
 
-                 </div>
+                </div>
                 <div class="details-list__item-title">
                     <strong id="info"><span class="title">Użytkownik  </span></strong>
                 </div>
@@ -94,18 +88,18 @@
                 <div class="details-list__item-value">
                     <strong id="info"><span class="color">@Html.DisplayFor(model => model.User.Profil_name)</span></strong>
                 </div>
-  
-           </div>
+
+            </div>
 
             <button id="popup" onclick="div_show()" class="btn btn-default">Wyślij wiadomość</button>
-           
-           
+
+
 
             <div id="abc">
                 <!-- Popup Div Starts Here -->
                 <div id="popupContact">
                     <!-- Contact Us Form -->
-           
+
                     @using (Html.BeginForm("SendMail2", "Ad", new { to = @Html.DisplayFor(model => model.User.Profil_name), id = @Html.DisplayFor(model => model.Id) }, FormMethod.Post))
                     { <form action="#" id="form" method="post" name="form">
                         <img id="close" src="~/Pictures/Icons/close.png" onclick="div_hide()">
@@ -114,9 +108,9 @@
                         <input id="name" name="subject" placeholder="Temat" type="text">
                         <input id="email" name="email" placeholder="Email" type="text">
                         <textarea id="msg" name="body" placeholder="Wiadomość"></textarea>
-                          
+
                         <input onclick="check_empty()" type="submit" class="btn" value="Wyślij" />
-                   
+
                         @*<p><button class="btn btn-lg btn-success btn-block" type="submit" onclick="location.href='@Url.Action("SendMail", "Ad")'">Wyślij</button></p>*@
                     </form>
                     }
@@ -124,49 +118,108 @@
                 <!-- Popup Div Ends Here -->
             </div>
             <!-- Display Popup Button -->
+            </div>
+              @* <div id="images">
+                    @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
+                    {
+                        if (item.AdId == Model.Id && item.Main_photo == true)
+                        {
+
+                            <img src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))"  height="550"/><br />
+
+                        }
+
+                    }
 
 
+                    <div id="productthumbs">
+                        @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
+                    {
+                        if (item.AdId == Model.Id)
+                        {
+                                <a href="#">
 
-               
-               
-</div>
-        <div id="images">
-            @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
+                                <img src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))" width="150" />
+                                </a>
+
+                            }
+
+                        }
+
+
+                     </div>
+                </div>*@
+
+
+            @*<div id="images">
+                
+                    @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
             {
                 if (item.AdId == Model.Id && item.Main_photo == true)
                 {
 
-                    <img src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))"  height="550"/><br />
+                            <img id="main" src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))" height="550" /><br />
 
-                }
+                        }
 
-            }
-           
-            
-            <div id="productthumbs">
+                    }
+
+                    <nav>
+                        @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
+                        {
+                            if (item.AdId == Model.Id)
+                            {
+                                <a href="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))">
+
+                                    <img src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))" width="150" />
+                                </a>
+
+                            }
+
+                        }
+
+                    </nav>
+                
+                </div>*@
+
+        <aside class="preview">
+
+
+
+            <nav>
                 @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
-            {
-                if (item.AdId == Model.Id) 
                 {
-                        <a href="#">
+                    if (item.AdId == Model.Id)
+                    {
+                        <a href="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))">
 
-                        <img src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))" width="150" />
+                            <img src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))" width="150" />
                         </a>
 
                     }
 
                 }
-               
-            
-             </div>
-        </div>
-    </article>
+
+            </nav>
+            @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
+            {
+                if (item.AdId == Model.Id && item.Main_photo == true)
+                {
+
+                    <img id="main" src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))" height="550" /><br />
+
+                }
+
+            }
+        </aside>
+</article>
 
 </body>
-</html>
+
 
 
 <script src="~/js/contact.js"></script>
 
-<script src="../js/jquery-1.6.js" type="text/javascript"></script>
-<script src="../js/jquery.jqzoom-core.js" type="text/javascript"></script>
+<script src="~/js/switcher.js"></script>
+
+

@@ -47,7 +47,7 @@ namespace Hanger.Controllers
                     ViewBag.Message = "Successfully Registration Done";
                 }
             }
-            return View(U);
+            return RedirectToAction("Login", "Login");
         }
 
     }

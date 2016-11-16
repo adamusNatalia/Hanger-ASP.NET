@@ -166,8 +166,30 @@ namespace Hanger.Controllers
                 {
                     A.Date_start = DateTime.Now;
                     A.UserId = (Session["LogedUserID"] as User).Id;
+                    //A.Id = 23;
                     db.Ad.Add(A);
-                    db.SaveChanges();
+                    //db.SaveChanges();
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                    {
+                        Exception raise = dbEx;
+                        foreach (var validationErrors in dbEx.EntityValidationErrors)
+                        {
+                            foreach (var validationError in validationErrors.ValidationErrors)
+                            {
+                                string message = string.Format("{0}:{1}",
+                                    validationErrors.Entry.Entity.ToString(),
+                                    validationError.ErrorMessage);
+                                // raise a new exception nesting
+                                // the current instance as InnerException
+                                raise = new InvalidOperationException(message, raise);
+                            }
+                        }
+                        throw raise;
+                    }
                     ModelState.Clear();
                     
                 }
@@ -226,6 +248,17 @@ namespace Hanger.Controllers
                             select d;
             ViewBag.SubcategoryId = new SelectList(sizeQuery, "Id", "Name", selectedSubcategory);
         }
+
+        //private void CategoryDropDownList(object selectedSubcategory = null)
+        //{
+        //    var sizeQuery = from d in db.Category
+        //                    orderby d.Name
+        //                    select d;
+        //    ViewBag.SelectedtegoryId = new SelectList(sizeQuery, "Id", "Name", selectedCategory);
+        //}
+
+
+
 
         public ActionResult Tiles()
             {

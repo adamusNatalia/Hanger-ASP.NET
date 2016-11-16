@@ -76,7 +76,7 @@ namespace Hanger.Controllers
 
                 }
             }
-            return View(u);
+            return RedirectToAction("New", "Ad");
         }
         public ActionResult AfterLogin()
         {
