@@ -28,43 +28,42 @@
             <th></th>
         </tr>
 
-            <tr>
-                <td>
-                    @Html.DropDownList("Size", "Wszystkie")
-                </td>
-                <td>
-                    @Html.DropDownList("Brand", "Wszystkie")
-                </td>
-                <td>
-                    @Html.DropDownList("Color", "Wszystkie")
-                </td>
-                <td>
-                   @Html.DropDownList("Condition", "Wszystkie")
-                </td>
-                <td>
-                    Od @Html.DropDownList("Price1", "")
-                    do @Html.DropDownList("Price2", "")
-                </td>
-                <td>
-                    <input type="submit" value="Szukaj" class="btn btn-search" style="padding: 0px;" />
-                </td>
-            </tr>
-       </table>   
-                    }
-    </p>
+        <tr>
+            <td>
+                @Html.DropDownList("Size", "Wszystkie")
+            </td>
+            <td>
+                @Html.DropDownList("Brand", "Wszystkie")
+            </td>
+            <td>
+                @Html.DropDownList("Color", "Wszystkie")
+            </td>
+            <td>
+                @Html.DropDownList("Condition", "Wszystkie")
+            </td>
+            <td>
+                Od @Html.DropDownList("Price1", "")
+                do @Html.DropDownList("Price2", "")
+            </td>
+            <td>
+                <input type="submit" value="Szukaj" class="btn btn-search" style="padding: 0px;" />
+            </td>
+        </tr>
+    </table>
+    }
+</p>
 
 @{ int j = 0;}
 <div id="wrapper">
     <div id="columns">
 
 
-        @*@for (int i = 0; i < 16 && j>=0; i++)*@
-        while(j<= Model.Count() - 1)
+        @while (j <= Model.Count() - 1)
 
         {
 
             <a href="@Url.Action("Product", "Ad", new { id =  Model.ElementAt(j).Id })" class="navbar-left">
-                <div class="pin"  style="break-inside: avoid-column;">
+                <div class="pin" style="break-inside: avoid-column;">
                     @{Boolean isPhoto = false; }
                     @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
                     {
@@ -95,10 +94,10 @@
                     </p>
                 </div>
             </a>
-            j++;
+                            j++;
 
-        }
+                        }
     </div>
 </div>
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page}))
+@Html.PagedListPager(Model, page => Url.Action("New", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })

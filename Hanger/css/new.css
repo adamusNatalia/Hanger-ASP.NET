@@ -168,6 +168,7 @@ p.left {
 	border-bottom: 1px solid #ccc;
 	padding-bottom: 15px;
 	margin-bottom: 5px;
+    height:250px;
 }
 
 .pin p {
@@ -214,4 +215,20 @@ label{
 
 table{
     margin-left:20%;
+}
+
+.btn.btn-search{
+    background-color: #dc679a;
+    color: #FFFFFF;
+    border: 2px solid #dc679a;
+    border-radius:6px;
+    margin-top: 3px;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: #dc679a;
+}
+
+.pagination {
+    margin-left: 20%;
 }

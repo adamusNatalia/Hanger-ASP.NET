@@ -78,6 +78,13 @@ namespace Hanger.Controllers
             }
             return RedirectToAction("New", "Ad");
         }
+
+
+        public ActionResult LogOut()
+        {
+            Session["LogedUserID"] = null;
+            return RedirectToAction("Index", "Home");
+        }
         public ActionResult AfterLogin()
         {
             if (Session["LogedUserID"] != null)

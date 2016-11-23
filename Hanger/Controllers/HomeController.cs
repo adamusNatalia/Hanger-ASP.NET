@@ -13,16 +13,25 @@ namespace Hanger.Controllers
         private HangerDatabase db = new HangerDatabase();
         public ActionResult Index()
         {
-            ViewBag.Title="Hanger";
-            return View();
-        }
-
-        public ActionResult New()
-        {
             var ad = from s in db.Ad
                      select s;
 
             return View(ad.ToList());
+
+        }
+
+        public ActionResult New()
+        {
+            
+            ViewBag.Title = "Hanger";
+            return View();
+        }
+
+        public ActionResult Interface()
+        {
+
+            ViewBag.Title = "Hanger";
+            return View();
         }
     }
 }

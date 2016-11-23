@@ -86,7 +86,8 @@
                 </div>
 
                 <div class="details-list__item-value">
-                    <strong id="info"><span class="color">@Html.DisplayFor(model => model.User.Profil_name)</span></strong>
+                    @*<strong id="info"><span class="color">@Html.DisplayFor(model => model.User.Profil_name)</span></strong>*@
+                    <a href="@Url.Action("UserCatalog", "UserProfil", new { Id=Model.UserId})"><strong id="info"><span class="color">@Html.DisplayFor(model => model.User.Profil_name)</span></strong></a>
                 </div>
 
             </div>

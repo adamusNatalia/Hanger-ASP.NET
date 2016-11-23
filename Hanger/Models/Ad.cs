@@ -11,7 +11,7 @@ namespace Hanger.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
     public partial class Ad
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,20 +20,29 @@ namespace Hanger.Models
             this.Photos = new HashSet<Photos>();
             this.Tags = new HashSet<Tags>();
         }
-    
+
         public int Id { get; set; }
         public int UserId { get; set; }
+        [DisplayName("Cena")]
         public float Price { get; set; }
+        [DisplayName("Tytu³ og³oszenia")]
         public string Title { get; set; }
+        [DisplayName("Opis og³oszenia")]
         public string Description { get; set; }
         public Nullable<System.DateTime> Date_start { get; set; }
+        [DisplayName("Rozmiar")]
         public int SizeId { get; set; }
+        [DisplayName("Kolor")]
         public int ColorId { get; set; }
+        [DisplayName("Kategoria")]
         public int SubcategoryId { get; set; }
+        [DisplayName("Stan")]
         public int ConditionId { get; set; }
+        [DisplayName("Mo¿liwoœæ wymiany")]
         public Nullable<bool> Swap { get; set; }
+        [DisplayName("Marka")]
         public Nullable<int> BrandId { get; set; }
-    
+
         public virtual Condition Condition { get; set; }
         public virtual Size Size { get; set; }
         public virtual Color Color { get; set; }

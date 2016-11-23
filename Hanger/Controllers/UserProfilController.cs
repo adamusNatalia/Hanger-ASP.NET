@@ -9,12 +9,38 @@ namespace Hanger.Controllers
 {
     public class UserProfilController : Controller
     {
+        private HangerDatabase db = new HangerDatabase();
         // GET: UserProfil
         public ActionResult Index()
         {
             return View();
         }
 
+        public ActionResult UserCatalog(int id)
+        {
+            //User user = db.User.Find(id);
+            //ViewBag.userId = id;
+            //Ad advertisement = db.Ad.Find(Id);
+            var ad = from s in db.Ad
+                     where (s.UserId == id)
+                     select s;
+
+            return View(ad.ToList());
+            //return View(user);
+        }
+
+        public ActionResult UserProfil(int id)
+        {
+            //User user = db.User.Find(id);
+            //ViewBag.userId = id;
+            //Ad advertisement = db.Ad.Find(Id);
+            var ad = from s in db.Ad
+                     where (s.UserId == id)
+                     select s;
+
+            return View(ad.ToList());
+            //return View(user);
+        }
 
         //[httppost]
         //public actionresult submitphoto()
@@ -46,5 +72,7 @@ namespace Hanger.Controllers
 
         //    return redirecttoaction("userwall", "wall");
         //}
+
+
     }
 }

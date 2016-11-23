@@ -24,15 +24,22 @@ namespace Hanger.Controllers
             Ad advertisement = db.Ad.Find(Id);
             return View(advertisement);
         }
-        
+
 
         public ActionResult Product(int Id)
         {
             Ad advertisement = db.Ad.Find(Id);
 
             return View(advertisement);
-
         }
+        public ActionResult Photo(int Id)
+        {
+            ViewBag.ad = Id;
+            Ad advertisement = db.Ad.Find(Id);
+
+            return View(advertisement);
+        }
+        
         [HttpPost]
         public ActionResult SendMail2(string email, string body, string subject, string to, int id )
         {
@@ -88,62 +95,7 @@ namespace Hanger.Controllers
 
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Message(Message M, string email, string name, string title)
-        //{
 
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-
-        //        {
-        //            A.Date_start = DateTime.Now;
-        //            A.UserId = (Session["LogedUserID"] as User).Id;
-        //            db.Ad.Add(A);
-        //            db.SaveChanges();
-        //            ModelState.Clear();
-
-        //        }
-        //    }
-        //    catch (RetryLimitExceededException /* dex */)
-        //    {
-        //        //Log the error (uncomment dex variable name and add a line here to write a log.)
-        //        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-        //    }
-        //    if (ModelState.IsValid)
-        //    {
-
-        //        {
-        //            M.Date = DateTime.Now;
-        //            if (Session["LogedUserID"] != null)
-        //            {
-        //                M.UserId = (Session["LogedUserID"] as User).Id;
-        //            }
-        //            else
-        //            {
-        //                M.UserId = 4;
-        //            }
-        //            M.UserId2=
-        //            db.SaveChanges();
-        //            ModelState.Clear();
-        //            U = null;
-        //            ViewBag.Message = "Successfully Registration Done";
-        //        }
-        //    }
-        //    return View(U);
-        //}
-
-
-
-
-
-
-        public ActionResult Photo()
-        {
-          
-            return View();
-        }
 
         public ActionResult New()
         {
@@ -159,6 +111,7 @@ namespace Hanger.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult New(Ad A)
         {
+            //int adId=32;
             try
             {
                 if (ModelState.IsValid)
@@ -167,7 +120,9 @@ namespace Hanger.Controllers
                     A.Date_start = DateTime.Now;
                     A.UserId = (Session["LogedUserID"] as User).Id;
                     //A.Id = 23;
+                    
                     db.Ad.Add(A);
+                    
                     //db.SaveChanges();
                     try
                     {
@@ -205,10 +160,11 @@ namespace Hanger.Controllers
             ColorDropDownList(A.ColorId);
             ConditionDropDownList(A.ConditionId);
             SubcategoryDropDownList(A.SubcategoryId);
-
+            int adId = (from ad in db.Ad
+                        select ad.Id).Max();
 
             //return View(A);
-            return RedirectToAction("Photo", "Ad");
+            return RedirectToAction("Photo", "Ad", new { id = adId });
         }
 
         private void SizeDropDownList(object selectedSize = null)
@@ -306,8 +262,7 @@ namespace Hanger.Controllers
             return RedirectToAction("Photo", "Ad");
         }
 
-
-        public ActionResult MainPhoto()
+        public ActionResult MPhoto(int adId)
         {
             HttpPostedFileBase file = Request.Files[0];
             byte[] imageSize = new byte[file.ContentLength];
@@ -329,8 +284,41 @@ namespace Hanger.Controllers
                     p.Id = 0;
 
                 // p.OwnerId = (Session["CurrentUserEmail"] as User).UserId;
-                p.AdId = (from ad in db.Ad
-                          select ad.Id).Max();
+                //  p.AdId = (from ad in db.Ad
+                //            select ad.Id).Max();
+                p.AdId = adId;
+                p.Type = file.ContentType;
+                p.Main_photo = true;
+                p.PhotoSiteId = 1;
+                db.Photos.Add(p);
+                db.SaveChanges();
+            }
+            //return RedirectToAction("New", "Home");
+            return RedirectToAction("Photo", "Ad", new { id = adId });
+        }
+        public ActionResult MainPhoto(int adId)
+        {
+            HttpPostedFileBase file = Request.Files[0];
+            byte[] imageSize = new byte[file.ContentLength];
+            file.InputStream.Read(imageSize, 0, (int)file.ContentLength);
+
+
+            using (HangerDatabase db = new HangerDatabase())
+            {
+                Photos p = new Photos();
+                p.Photo = imageSize;
+                p.FIle_name = file.FileName;
+
+                if (db.Photos != null && db.Photos.Count() != 0)
+                {
+                    p.Id = (from ph in db.Photos
+                            select ph.Id).Max() + 1;
+                }
+                else
+                    p.Id = 0;
+
+                // p.OwnerId = (Session["CurrentUserEmail"] as User).UserId;
+                p.AdId = adId;
                 p.Type = file.ContentType;
                 p.Main_photo = true;
                 p.PhotoSiteId = 1;
@@ -339,9 +327,9 @@ namespace Hanger.Controllers
             }
 
             //return RedirectToAction("New", "Home");
-            return RedirectToAction("Photo", "Ad");
+            return RedirectToAction("Photo", "Ad", new { id = adId });
         }
-        public ActionResult ModelPhoto()
+        public ActionResult ModelPhoto(int adId)
         {
             HttpPostedFileBase file = Request.Files[0];
             byte[] imageSize = new byte[file.ContentLength];
@@ -363,8 +351,9 @@ namespace Hanger.Controllers
                     p.Id = 0;
 
                 // p.OwnerId = (Session["CurrentUserEmail"] as User).UserId;
-                p.AdId = (from ad in db.Ad
-                          select ad.Id).Max();
+                //  p.AdId = (from ad in db.Ad
+                //            select ad.Id).Max();
+                p.AdId = adId;
                 p.Type = file.ContentType;
                 p.Main_photo = false;
                 p.PhotoSiteId = 2;
@@ -372,12 +361,12 @@ namespace Hanger.Controllers
                 db.SaveChanges();
             }
             //return RedirectToAction("New", "Home");
-            return RedirectToAction("Photo", "Ad");
+            return RedirectToAction("Photo", "Ad",new { id = adId });
         }
 
 
 
-        public ActionResult ZoomPhoto()
+        public ActionResult ZoomPhoto(int adId)
         {
             HttpPostedFileBase file = Request.Files[0];
             byte[] imageSize = new byte[file.ContentLength];
@@ -399,8 +388,7 @@ namespace Hanger.Controllers
                     p.Id = 0;
 
                 // p.OwnerId = (Session["CurrentUserEmail"] as User).UserId;
-                p.AdId = (from ad in db.Ad
-                          select ad.Id).Max();
+                p.AdId = adId;
                 p.Type = file.ContentType;
                 p.Main_photo = false;
                 p.PhotoSiteId = 3;
@@ -409,10 +397,10 @@ namespace Hanger.Controllers
             }
 
             //return RedirectToAction("New", "Home");
-            return RedirectToAction("Photo", "Ad");
+            return RedirectToAction("Photo", "Ad", new { id = adId });
         }
 
-        public ActionResult BackPhoto()
+        public ActionResult BackPhoto(int adId)
         {
             HttpPostedFileBase file = Request.Files[0];
             byte[] imageSize = new byte[file.ContentLength];
@@ -434,8 +422,7 @@ namespace Hanger.Controllers
                     p.Id = 0;
 
                 // p.OwnerId = (Session["CurrentUserEmail"] as User).UserId;
-                p.AdId = (from ad in db.Ad
-                          select ad.Id).Max();
+                p.AdId = adId;
                 p.Type = file.ContentType;
                 p.Main_photo = false;
                 p.PhotoSiteId = 4;
@@ -444,9 +431,23 @@ namespace Hanger.Controllers
             }
 
             //return RedirectToAction("New", "Home");
-            return RedirectToAction("Photo", "Ad");
+            return RedirectToAction("Photo", "Ad", new { id = adId });
         }
+        [HttpPost]
+        public ActionResult Delete(int id, int adId)
+        {
+            using (HangerDatabase DataContext = new HangerDatabase())
+            {
+                var photoToDelete = (from p in DataContext.Photos
+                                     where p.Id == id
+                                     select p).FirstOrDefault();
 
+                DataContext.Photos.Remove(photoToDelete);
+                DataContext.SaveChanges();
+            }
+
+            return RedirectToAction("Photo", "Ad", new { id = adId });
+        }
     }
 
     }

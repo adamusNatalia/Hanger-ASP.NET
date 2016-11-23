@@ -45,3 +45,11 @@
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
 }
+
+
+.navbar-inverse .navbar-nav > li.profil > a:hover, .navbar-inverse .navbar-nav > li.profil > a:focus {
+    background-color: none;
+    color: #000000;
+    border: 2px solid #dc679a;
+    border-radius: 6px;
+}

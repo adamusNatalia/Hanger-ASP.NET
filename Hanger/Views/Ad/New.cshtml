@@ -1,7 +1,7 @@
 ﻿@model Hanger.Models.Ad
 
 @Styles.Render("~/css/account.css")
-
+@Styles.Render("~/css/new-ad.css")
 @{
     ViewBag.Title = "Dodaj ogłoszenie";
 }
@@ -14,23 +14,11 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        @if (Session["LogedUserID"] != null)
-        {
-            <small>
-                Hello @(((Session["LogedUserID"] as Hanger.Models.User).Profil_name) )
 
-            </small>
-        }
         <hr />
         @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price)
-                @Html.ValidationMessageFor(model => model.Price)
-            </div>
-        </div>
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -90,6 +78,20 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.BrandId, "Marka", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("BrandId", String.Empty)
+                @Html.ValidationMessageFor(model => model.BrandId)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price)
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
+        </div>
+        <div class="form-group">
             @Html.LabelFor(model => model.Swap, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Swap)
@@ -97,13 +99,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.BrandId, "Marka", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("BrandId", String.Empty)
-                @Html.ValidationMessageFor(model => model.BrandId)
-            </div>
-        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
