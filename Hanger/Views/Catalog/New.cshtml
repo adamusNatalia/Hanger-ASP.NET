@@ -1,12 +1,10 @@
 ﻿@using PagedList;
 @using PagedList.Mvc;
 @model PagedList.IPagedList<Hanger.Models.Ad>
-    ViewBag.Title = "New";
-}
 @Styles.Render("~/css/new.css")
 
 <p style="padding-top: 50px;">
-    @using (Html.BeginForm("Index", "Catalog", FormMethod.Get))
+    @using (Html.BeginForm("New", "Catalog", FormMethod.Get))
     {<table class="table" style="width: initial;">
         <tr>
             <th>

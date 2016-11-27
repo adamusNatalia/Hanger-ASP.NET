@@ -52,7 +52,7 @@ body {
 
 .navbar-inverse {
     background-color: rgba(245, 245, 245, 0.94);
-    border-color: #ffffff;
+    border-color: #e9e9ea;
     box-shadow: 0 1px 8px 0 grey;
 }
 
@@ -154,8 +154,9 @@ ul, ol {
 
 /* Carousel base class */
 .carousel {
-  height: 700px;
-  margin-bottom: 60px;
+    height: 650px;
+    margin-top: 60px;
+    /* margin-bottom: 100px; */
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {

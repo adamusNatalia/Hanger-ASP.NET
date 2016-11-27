@@ -181,9 +181,22 @@ namespace Hanger.Controllers
             //              where (d.Name == color)
             //              select d.Id;
             List<SelectListItem> Price = new List<SelectListItem>();
+            Price.Add(new SelectListItem() { Text = "10", Value = "10" });
+            Price.Add(new SelectListItem() { Text = "20", Value = "20" });
+            Price.Add(new SelectListItem() { Text = "30", Value = "30" });
+            Price.Add(new SelectListItem() { Text = "40", Value = "40" });
             Price.Add(new SelectListItem() { Text = "50", Value = "50" });
+            Price.Add(new SelectListItem() { Text = "60", Value = "60" });
+            Price.Add(new SelectListItem() { Text = "70", Value = "70" });
+            Price.Add(new SelectListItem() { Text = "80", Value = "80" });
             Price.Add(new SelectListItem() { Text = "90", Value = "90" });
+            Price.Add(new SelectListItem() { Text = "100", Value = "100" });
+            Price.Add(new SelectListItem() { Text = "110", Value = "110" });
+            Price.Add(new SelectListItem() { Text = "120", Value = "120" });
+            Price.Add(new SelectListItem() { Text = "130", Value = "130" });
+            Price.Add(new SelectListItem() { Text = "140", Value = "140" });
             Price.Add(new SelectListItem() { Text = "150", Value = "150" });
+            Price.Add(new SelectListItem() { Text = "200", Value = "200" });
 
             ViewBag.price1 = new SelectList(Price, "Value", "Text");
             ViewBag.price2 = new SelectList(Price, "Value", "Text");
@@ -234,7 +247,7 @@ namespace Hanger.Controllers
 
             }
             ad = ad.OrderByDescending(s => s.Id);
-            return View(ad.ToList().ToPagedList(page ?? 1, 9));
+            return View(ad.ToList().ToPagedList(page ?? 1, 32));
         }
 
         public ActionResult New(string size, string brand, string condition, string color, string price1, string price2, int? page)
@@ -298,22 +311,24 @@ namespace Hanger.Controllers
                           where (d.Name == color)
                           select d.Id;
 
-            //var PriceFromLst = new List<string>();
 
-            //var PriceFromQry = from d in db.Ad
-            //               orderby d.Price
-            //               select d.Price;
-
-            //PriceFromLst.AddRange(PriceFromQry.Distinct());
-            //ViewBag.color = new SelectList(ColorLst);
-
-            //var IdColor = from d in db.Brand
-            //              where (d.Name == color)
-            //              select d.Id;
             List<SelectListItem> Price = new List<SelectListItem>();
+            Price.Add(new SelectListItem() { Text = "10", Value = "10" });
+            Price.Add(new SelectListItem() { Text = "20", Value = "20" });
+            Price.Add(new SelectListItem() { Text = "30", Value = "30" });
+            Price.Add(new SelectListItem() { Text = "40", Value = "40" });
             Price.Add(new SelectListItem() { Text = "50", Value = "50" });
+            Price.Add(new SelectListItem() { Text = "60", Value = "60" });
+            Price.Add(new SelectListItem() { Text = "70", Value = "70" });
+            Price.Add(new SelectListItem() { Text = "80", Value = "80" });
             Price.Add(new SelectListItem() { Text = "90", Value = "90" });
+            Price.Add(new SelectListItem() { Text = "100", Value = "100" });
+            Price.Add(new SelectListItem() { Text = "110", Value = "110" });
+            Price.Add(new SelectListItem() { Text = "120", Value = "120" });
+            Price.Add(new SelectListItem() { Text = "130", Value = "130" });
+            Price.Add(new SelectListItem() { Text = "140", Value = "140" });
             Price.Add(new SelectListItem() { Text = "150", Value = "150" });
+            Price.Add(new SelectListItem() { Text = "200", Value = "200" });
 
             ViewBag.price1 = new SelectList(Price, "Value", "Text");
             ViewBag.price2 = new SelectList(Price, "Value", "Text");
@@ -364,7 +379,7 @@ namespace Hanger.Controllers
 
             }
             ad = ad.OrderByDescending(s => s.Id);
-            return View(ad.ToList().ToPagedList(page ?? 1, 16));
+            return View(ad.ToList().ToPagedList(page ?? 1, 32));
         }
 
 
@@ -510,6 +525,134 @@ namespace Hanger.Controllers
             
             return View();
         }
+        public ActionResult Test(string size, string brand, string condition, string color, string price1, string price2, int? page)
+        {
 
+            var ad = from s in db.Ad
+                     select s;
+            if (ad == null)
+            {
+                return RedirectToAction("NoItems", "Catalog");
+            }
+
+            var SizeLst = new List<string>();
+
+            var SizeQry = from d in db.Size
+                          orderby d.Name
+                          select d.Name;
+
+            SizeLst.AddRange(SizeQry.Distinct());
+            ViewBag.size = new SelectList(SizeLst);
+
+            var IdSize = from d in db.Size
+                         where (d.Name == size)
+                         select d.Id;
+
+            var BrandLst = new List<string>();
+
+            var BrandQry = from d in db.Brand
+                           orderby d.Name
+                           select d.Name;
+
+            BrandLst.AddRange(BrandQry.Distinct());
+            ViewBag.brand = new SelectList(BrandLst);
+
+            var IdBrand = from d in db.Brand
+                          where (d.Name == brand)
+                          select d.Id;
+            var ConditionLst = new List<string>();
+
+            var ConditionQry = from d in db.Condition
+                               orderby d.Name
+                               select d.Name;
+
+            ConditionLst.AddRange(ConditionQry.Distinct());
+            ViewBag.condition = new SelectList(ConditionLst);
+
+            var IdCondition = from d in db.Condition
+                              where (d.Name == condition)
+                              select d.Id;
+
+            var ColorLst = new List<string>();
+
+            var ColorQry = from d in db.Color
+                           orderby d.Name
+                           select d.Name;
+
+            ColorLst.AddRange(ColorQry.Distinct());
+            ViewBag.color = new SelectList(ColorLst);
+
+            var IdColor = from d in db.Brand
+                          where (d.Name == color)
+                          select d.Id;
+
+            //var PriceFromLst = new List<string>();
+
+            //var PriceFromQry = from d in db.Ad
+            //               orderby d.Price
+            //               select d.Price;
+
+            //PriceFromLst.AddRange(PriceFromQry.Distinct());
+            //ViewBag.color = new SelectList(ColorLst);
+
+            //var IdColor = from d in db.Brand
+            //              where (d.Name == color)
+            //              select d.Id;
+            List<SelectListItem> Price = new List<SelectListItem>();
+            Price.Add(new SelectListItem() { Text = "50", Value = "50" });
+            Price.Add(new SelectListItem() { Text = "90", Value = "90" });
+            Price.Add(new SelectListItem() { Text = "150", Value = "150" });
+
+            ViewBag.price1 = new SelectList(Price, "Value", "Text");
+            ViewBag.price2 = new SelectList(Price, "Value", "Text");
+
+
+            if (!String.IsNullOrEmpty(size))
+            {
+                int idSize = (from d in db.Size
+                              where (d.Name == size)
+                              select d.Id).Max();
+                ad = ad.Where(x => x.SizeId == idSize);
+            }
+            if (!String.IsNullOrEmpty(condition))
+            {
+                int idCondition = (from d in db.Condition
+                                   where (d.Name == condition)
+                                   select d.Id).Max();
+                ad = ad.Where(x => x.ConditionId == idCondition);
+            }
+
+            if (!String.IsNullOrEmpty(color))
+            {
+                int idColor = (from d in db.Color
+                               where (d.Name == color)
+                               select d.Id).Max();
+                ad = ad.Where(x => x.ColorId == idColor);
+            }
+
+            if (!String.IsNullOrEmpty(brand))
+            {
+                int idBrand = (from d in db.Brand
+                               where (d.Name == brand)
+                               select d.Id).Max();
+                ad = ad.Where(x => x.BrandId == idBrand);
+
+            }
+
+            if (!String.IsNullOrEmpty(price1))
+            {
+                float from = float.Parse(price1);
+                ad = ad.Where(x => x.Price >= from);
+
+            }
+            if (!String.IsNullOrEmpty(price2))
+            {
+                float to = float.Parse(price2);
+                ad = ad.Where(x => x.Price <= to);
+
+            }
+            ad = ad.OrderByDescending(s => s.Id);
+            return View(ad.ToList().ToPagedList(page ?? 1, 9));
+        }
     }
 }

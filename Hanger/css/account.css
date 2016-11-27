@@ -4,6 +4,10 @@
         margin: 30px auto;
     }
 }
+
+.modal-body {
+    margin-top:100px;
+}
 .text-success, .text-success:hover {
     color: #dc679a;
 }

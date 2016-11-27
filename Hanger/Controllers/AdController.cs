@@ -7,6 +7,7 @@ using Hanger.Models;
 using System.Data.Entity.Infrastructure;
 using System.Net.Mail;
 using System.Net;
+using System.Data.Entity;
 
 namespace Hanger.Controllers
 {
@@ -32,6 +33,14 @@ namespace Hanger.Controllers
 
             return View(advertisement);
         }
+        public ActionResult Photo1(int Id)
+        {
+            ViewBag.ad = Id;
+            Ad advertisement = db.Ad.Find(Id);
+
+            return View(advertisement);
+        }
+
         public ActionResult Photo(int Id)
         {
             ViewBag.ad = Id;
@@ -39,36 +48,8 @@ namespace Hanger.Controllers
 
             return View(advertisement);
         }
-        
-        [HttpPost]
-        public ActionResult SendMail2(string email, string body, string subject, string to, int id )
-        {
-            var user = from p in db.User
-                       where p.Profil_name == to
-                       select p;
 
-            
-            MailMessage msg = new MailMessage();
-          
-            String emailTo = user.First().Mail;
 
-            msg.To.Add(emailTo);
-            //msg.To.Add("hanger.natalia@gmail.com");
-            //msg.From = new MailAddress(email);
-            msg.From = new MailAddress("hanger.natalia@gmail.com",email);
-            msg.Subject = subject;
-            msg.Body = body;
-            msg.Priority = MailPriority.Normal;
-
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
-
-            client.Credentials = new NetworkCredential("hanger.natalia@gmail.com", "hangertest");
-
-            client.EnableSsl = true;
-    
-            client.Send(msg);
-            return RedirectToAction("Product", "Ad", new { Id = id });
-        }
         [HttpPost]
         public ActionResult SendMail()
         {
@@ -164,13 +145,104 @@ namespace Hanger.Controllers
                         select ad.Id).Max();
 
             //return View(A);
-            return RedirectToAction("Photo", "Ad", new { id = adId });
+            return RedirectToAction("Photo1", "Ad", new { id = adId });
+        }
+        public ActionResult Edit(int id)
+        {
+            if (id == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Ad ad = db.Ad.Find(id);
+            if (ad == null)
+            {
+                return HttpNotFound();
+            }
+            SizeDropDownList(ad.SizeId);
+            BrandDropDownList(ad.BrandId);
+            ColorDropDownList(ad.ColorId);
+            ConditionDropDownList(ad.ConditionId);
+            SubcategoryDropDownList(ad.SubcategoryId);
+            return View(ad);
+        }
+
+        //[HttpPost, ActionName("Edit")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult EditPost(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    var adToUpdate = db.Ad.Find(id);
+        //    if (TryUpdateModel(adToUpdate, "",
+        //       new string[] { "UserId", "Price", "Title", "Description", "SizeId", "ColorId", "SubcategoryId", "ConditionId", "Swap", "BrandId" }))
+        //    {
+        //        try
+        //        {
+        //            db.SaveChanges();
+
+        //            return RedirectToAction("Index");
+        //        }
+        //        catch (RetryLimitExceededException /* dex */)
+        //        {
+        //            //Log the error (uncomment dex variable name and add a line here to write a log.
+        //            ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+        //        }
+        //    }
+
+        //    SizeDropDownList(adToUpdate.SizeId);
+        //    BrandDropDownList(adToUpdate.BrandId);
+        //    ColorDropDownList(adToUpdate.ColorId);
+        //    ConditionDropDownList(adToUpdate.ConditionId);
+        //    SubcategoryDropDownList(adToUpdate.SubcategoryId);
+        //    return RedirectToAction("Photo", "Ad", new { id = id });
+        //}
+
+
+        [HttpPost]
+        public ActionResult Edit(Ad A)
+        {
+            if (ModelState.IsValid)
+            {
+                A.UserId = (Session["LogedUserID"] as User).Id;
+                db.Entry(A).State = EntityState.Modified;
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    Exception raise = dbEx;
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            string message = string.Format("{0}:{1}",
+                                validationErrors.Entry.Entity.ToString(),
+                                validationError.ErrorMessage);
+                            // raise a new exception nesting
+                            // the current instance as InnerException
+                            raise = new InvalidOperationException(message, raise);
+                        }
+                    }
+                    throw raise;
+                }
+                return RedirectToAction("Photo1", "Ad", new { id = A.Id });
+
+            }
+            SizeDropDownList(A.SizeId);
+            BrandDropDownList(A.BrandId);
+            ColorDropDownList(A.ColorId);
+            ConditionDropDownList(A.ConditionId);
+            SubcategoryDropDownList(A.SubcategoryId);
+            return View(A);
         }
 
         private void SizeDropDownList(object selectedSize = null)
         {
             var sizeQuery = from d in db.Size
-                                   orderby d.Name
+                                   orderby d.Id
                                    select d;
             ViewBag.SizeId = new SelectList(sizeQuery, "Id", "Name", selectedSize);
         }
@@ -184,7 +256,7 @@ namespace Hanger.Controllers
         private void BrandDropDownList(object selectedBrand = null)
         {
             var sizeQuery = from d in db.Brand
-                            orderby d.Name
+                            orderby d.Id
                             select d;
             ViewBag.BrandId = new SelectList(sizeQuery, "Id", "Name", selectedBrand);
         }
@@ -200,7 +272,7 @@ namespace Hanger.Controllers
         private void SubcategoryDropDownList(object selectedSubcategory = null)
         {
             var sizeQuery = from d in db.Subcategory
-                            orderby d.Name
+                            orderby d.Id
                             select d;
             ViewBag.SubcategoryId = new SelectList(sizeQuery, "Id", "Name", selectedSubcategory);
         }
@@ -229,6 +301,41 @@ namespace Hanger.Controllers
 
             return View(ad.ToList());
         }
+
+        public ActionResult MainPhoto(int adId)
+        {
+            HttpPostedFileBase file = Request.Files[0];
+            byte[] imageSize = new byte[file.ContentLength];
+            file.InputStream.Read(imageSize, 0, (int)file.ContentLength);
+
+
+            using (HangerDatabase db = new HangerDatabase())
+            {
+                Photos p = new Photos();
+                p.Photo = imageSize;
+                p.FIle_name = file.FileName;
+
+                if (db.Photos != null && db.Photos.Count() != 0)
+                {
+                    p.Id = (from ph in db.Photos
+                            select ph.Id).Max() + 1;
+                }
+                else
+                    p.Id = 0;
+
+                // p.OwnerId = (Session["CurrentUserEmail"] as User).UserId;
+                p.AdId = adId;
+                p.Type = file.ContentType;
+                p.Main_photo = true;
+                p.PhotoSiteId = 1;
+                db.Photos.Add(p);
+                db.SaveChanges();
+            }
+
+            //return RedirectToAction("New", "Home");
+            return RedirectToAction("Photo1", "Ad", new { id = adId });
+        }
+
         public ActionResult FrontPhoto()
         {
             HttpPostedFileBase file = Request.Files[0];
@@ -261,7 +368,6 @@ namespace Hanger.Controllers
             //return RedirectToAction("New", "Home");
             return RedirectToAction("Photo", "Ad");
         }
-
         public ActionResult MPhoto(int adId)
         {
             HttpPostedFileBase file = Request.Files[0];
@@ -293,39 +399,6 @@ namespace Hanger.Controllers
                 db.Photos.Add(p);
                 db.SaveChanges();
             }
-            //return RedirectToAction("New", "Home");
-            return RedirectToAction("Photo", "Ad", new { id = adId });
-        }
-        public ActionResult MainPhoto(int adId)
-        {
-            HttpPostedFileBase file = Request.Files[0];
-            byte[] imageSize = new byte[file.ContentLength];
-            file.InputStream.Read(imageSize, 0, (int)file.ContentLength);
-
-
-            using (HangerDatabase db = new HangerDatabase())
-            {
-                Photos p = new Photos();
-                p.Photo = imageSize;
-                p.FIle_name = file.FileName;
-
-                if (db.Photos != null && db.Photos.Count() != 0)
-                {
-                    p.Id = (from ph in db.Photos
-                            select ph.Id).Max() + 1;
-                }
-                else
-                    p.Id = 0;
-
-                // p.OwnerId = (Session["CurrentUserEmail"] as User).UserId;
-                p.AdId = adId;
-                p.Type = file.ContentType;
-                p.Main_photo = true;
-                p.PhotoSiteId = 1;
-                db.Photos.Add(p);
-                db.SaveChanges();
-            }
-
             //return RedirectToAction("New", "Home");
             return RedirectToAction("Photo", "Ad", new { id = adId });
         }
@@ -363,9 +436,6 @@ namespace Hanger.Controllers
             //return RedirectToAction("New", "Home");
             return RedirectToAction("Photo", "Ad",new { id = adId });
         }
-
-
-
         public ActionResult ZoomPhoto(int adId)
         {
             HttpPostedFileBase file = Request.Files[0];
@@ -399,7 +469,6 @@ namespace Hanger.Controllers
             //return RedirectToAction("New", "Home");
             return RedirectToAction("Photo", "Ad", new { id = adId });
         }
-
         public ActionResult BackPhoto(int adId)
         {
             HttpPostedFileBase file = Request.Files[0];
@@ -433,6 +502,39 @@ namespace Hanger.Controllers
             //return RedirectToAction("New", "Home");
             return RedirectToAction("Photo", "Ad", new { id = adId });
         }
+
+        public ActionResult AddPhoto(int adId)
+        {
+            HttpPostedFileBase file = Request.Files[0];
+            byte[] imageSize = new byte[file.ContentLength];
+            file.InputStream.Read(imageSize, 0, (int)file.ContentLength);
+
+
+            using (HangerDatabase db = new HangerDatabase())
+            {
+                Photos p = new Photos();
+                p.Photo = imageSize;
+                p.FIle_name = file.FileName;
+
+                if (db.Photos != null && db.Photos.Count() != 0)
+                {
+                    p.Id = (from ph in db.Photos
+                            select ph.Id).Max() + 1;
+                }
+                else
+                    p.Id = 0;
+
+                // p.OwnerId = (Session["CurrentUserEmail"] as User).UserId;
+                p.AdId = adId;
+                p.Type = file.ContentType;
+                p.Main_photo = false;
+                db.Photos.Add(p);
+                db.SaveChanges();
+            }
+
+            //return RedirectToAction("New", "Home");
+            return RedirectToAction("Photo1", "Ad", new { id = adId });
+        }
         [HttpPost]
         public ActionResult Delete(int id, int adId)
         {
@@ -446,10 +548,45 @@ namespace Hanger.Controllers
                 DataContext.SaveChanges();
             }
 
-            return RedirectToAction("Photo", "Ad", new { id = adId });
+            return RedirectToAction("Photo1", "Ad", new { id = adId });
         }
-    }
 
-    }
+            [HttpPost]
+        public ActionResult SendMail2(string email, string body, string subject, string to, int id )
+        {
+            var user = from p in db.User
+                       where p.Profil_name == to
+                       select p;
 
+            string adId = id.ToString();
+            MailMessage msg = new MailMessage();
+          
+            String emailTo = user.First().Mail;
+
+            msg.To.Add(emailTo);
+            //msg.To.Add("hanger.natalia@gmail.com");
+            msg.From = new MailAddress(email);
+           // msg.From = new MailAddress("hanger.natalia@gmail.com",email);
+            msg.Sender= new MailAddress(email);
+           
+            msg.Subject = subject;
+            
+            msg.Body = "Witaj," + Environment.NewLine + @"Użytkownik jest zainteresowanya Twoim ogłoszeniem: http://localhost:15054/Ad/Product/"+adId + Environment.NewLine+ @body
+                + Environment.NewLine + "Pozdrawiam," + Environment.NewLine + "Hanger Sp.ZOO"; ;
+            msg.Priority = MailPriority.Normal;
+
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+
+            client.Credentials = new NetworkCredential("hanger.natalia@gmail.com", "hangertest");
+
+            client.EnableSsl = true;
     
+            client.Send(msg);
+            return RedirectToAction("Product", "Ad", new { Id = id });
+        }
+
+
+    }
+
+    }
+

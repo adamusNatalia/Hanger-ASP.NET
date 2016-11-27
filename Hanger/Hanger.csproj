@@ -254,6 +254,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
+    <Content Include="css\bootstrap.min2.css" />
+    <Content Include="css\photo.css" />
     <Content Include="css\dropdown.css" />
     <Content Include="css\account.css" />
     <Content Include="css\bootstrap-theme.css" />
@@ -305,6 +307,7 @@
     <Content Include="Pictures\Icons\user.png" />
     <Content Include="Pictures\Icons\user1.png" />
     <Content Include="Pictures\Icons\user2.png" />
+    <Content Include="Pictures\Icons\user3.png" />
     <Content Include="Pictures\Login\4a.jpg" />
     <Content Include="Pictures\6.jpg" />
     <Content Include="Pictures\6_pop_small.png" />
@@ -372,6 +375,9 @@
     <Content Include="Views\UserProfil\UserCatalog.cshtml" />
     <Content Include="Views\Home\Interface.cshtml" />
     <Content Include="Views\Catalog\New.cshtml" />
+    <Content Include="Views\Ad\Photo1.cshtml" />
+    <Content Include="Views\Ad\Edit.cshtml" />
+    <Content Include="Views\UserProfil\UserProfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,7 +6,7 @@ body {
 #wrapper {
 	max-width: 800px;
 	min-width: 400px;
-	margin: 50px auto;
+	margin: 30px auto;
 }
 
 #columns {
@@ -168,7 +168,7 @@ p.left {
 	border-bottom: 1px solid #ccc;
 	padding-bottom: 15px;
 	margin-bottom: 5px;
-    height:250px;
+    height:230px;
 }
 
 .pin p {
@@ -215,6 +215,8 @@ label{
 
 table{
     margin-left:20%;
+    font-size: 12px;
+    margin: 20px auto;
 }
 
 .btn.btn-search{
@@ -230,5 +232,7 @@ table{
 }
 
 .pagination {
-    margin-left: 20%;
+    display: table;
+    margin: 0 auto 0 auto;
+    font-size: 12px;
 }

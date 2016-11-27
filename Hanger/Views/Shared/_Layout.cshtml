@@ -87,7 +87,7 @@
                                     </li>
                                     <li class="divider"></li>
                                     <li class="dropdown-submenu">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Damskie obówie</a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Damskie Obówie</a>
                                         <ul class="dropdown-menu">
                                             <li><a href="@Url.Action("Index", "Catalog",new { id = 15 })">Sandały</a></li>
                                             <li><a href="@Url.Action("Index", "Catalog",new { id = 16 })">Półbuty</a></li>
@@ -107,19 +107,6 @@
                                             <li><a href="@Url.Action("Index", "Catalog",new { id = 24 })">Plecaki</a></li>
                                         </ul>
                                     </li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-submenu">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Męska odzież</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="@Url.Action("Index", "Catalog",new { id = 25 })">Odzież wierzchnia</a></li>
-                                            <li><a href="@Url.Action("Index", "Catalog",new { id = 26 })">Obuwie</a></li>
-                                            <li><a href="@Url.Action("Index", "Catalog",new { id = 27 })">Koszule i T-shirty</a></li>
-                                            <li><a href="@Url.Action("Index", "Catalog",new { id = 28 })">Bluzy i swetry</a></li>
-                                            <li><a href="@Url.Action("Index", "Catalog",new { id = 29 })">Garnitury</a></li>
-                                            <li><a href="@Url.Action("Index", "Catalog",new { id = 30 })">Spodnie</a></li>
-                                            <li><a href="@Url.Action("Index", "Catalog",new { id = 31 })">Inne</a></li>
-                                        </ul>
-                                    </li>
                                 </ul>
                             </li>
 
@@ -132,8 +119,8 @@
                             @if (Session["LogedUserID"] != null)
                             {
                                 <li style="margin-top:-7px;">
-                                    <a href="@Url.Action("UserCatalog", "UserProfil", new { id = 7 })">
-                                        <img alt="Brand" src="~/Pictures/Icons/user2.png" style="width:40px">
+                                    <a href="@Url.Action("UserProfil", "UserProfil", new { id = (Session["LogedUserID"] as Hanger.Models.User).Id })">
+                                        <img alt="Brand" src="~/Pictures/Icons/user3.png" style="width:40px">
                                     </a>
                                 </li>
                             }
@@ -150,10 +137,24 @@
                                 </li>
 
                             }
-                           
+                            @*@if (Session["LogedUserID"] != null)
+                            {
+                                <li class="frame" id="sell">
+                                    @Html.ActionLink("Sprzedaj", "New", "Ad")
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="frame" id="login">
+                                    @Html.ActionLink("Zrejestruj się", "Register", "Register")
+                                </li>
+
+                            }*@
+
                             <li class="frame" id="sell">
                                 @Html.ActionLink("Sprzedaj", "New", "Ad")
                             </li>
+                            
                         </ul>
                     </div>
                 </div>

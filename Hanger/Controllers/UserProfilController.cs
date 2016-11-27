@@ -24,6 +24,8 @@ namespace Hanger.Controllers
             var ad = from s in db.Ad
                      where (s.UserId == id)
                      select s;
+            User u = db.User.Find(id);
+            ViewBag.profilName = u.Profil_name;
 
             return View(ad.ToList());
             //return View(user);
@@ -37,7 +39,9 @@ namespace Hanger.Controllers
             var ad = from s in db.Ad
                      where (s.UserId == id)
                      select s;
-
+            
+            User u = db.User.Find(id);
+            ViewBag.profilName = u.Profil_name;
             return View(ad.ToList());
             //return View(user);
         }

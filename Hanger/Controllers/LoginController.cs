@@ -76,7 +76,7 @@ namespace Hanger.Controllers
 
                 }
             }
-            return RedirectToAction("New", "Ad");
+            return RedirectToAction("UserProfil", "UserProfil", new { id = (Session["LogedUserID"] as Hanger.Models.User).Id });
         }
 
 

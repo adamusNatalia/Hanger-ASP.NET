@@ -1,8 +1,7 @@
 ﻿@using PagedList;
 @using PagedList.Mvc;
 @model PagedList.IPagedList<Hanger.Models.Ad>
-    ViewBag.Title = "New";
-}
+
 @Styles.Render("~/css/new.css")
 
 <p style="padding-top: 50px;">
@@ -59,7 +58,7 @@
 
 
         @*@for (int i = 0; i < 16 && j>=0; i++)*@
-        while(j<= Model.Count() - 1)
+        @while(j<= Model.Count() - 1)
 
         {
 

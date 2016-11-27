@@ -1,0 +1,11 @@
+﻿.btn{
+padding: 5px 10px;
+}
+
+.inline{
+    display: inline-block;
+}
+
+input[type="file"] {
+    display: inherit;
+}
