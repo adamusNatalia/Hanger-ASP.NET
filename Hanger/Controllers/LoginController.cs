@@ -51,7 +51,7 @@ namespace Hanger.Controllers
                     Console.WriteLine("Zalogowano");
                     //var v = db.User.Where(a => a.Profil_name.Equals(u.Profil_name) && a.Password.Equals(u.Password)).FirstOrDefault();
                     var user = from p in db.User
-                               where p.Profil_name == u.Profil_name && p.Password == p.Password
+                               where p.Profil_name == u.Profil_name && p.Password == u.Password
                                select p;
 
 
@@ -76,7 +76,9 @@ namespace Hanger.Controllers
 
                 }
             }
-            return RedirectToAction("UserProfil", "UserProfil", new { id = (Session["LogedUserID"] as Hanger.Models.User).Id });
+            // return RedirectToAction("UserProfil", "UserProfil", new { id = (Session["LogedUserID"] as Hanger.Models.User).Id });
+            ModelState.AddModelError("", "Błędna nazwa profilu lub hasło. Proszę wprowadź prawidłowe dane.");
+            return View(u);
         }
 
 
@@ -89,7 +91,7 @@ namespace Hanger.Controllers
         {
             if (Session["LogedUserID"] != null)
             {
-                return RedirectToAction("New","Ad");
+                return RedirectToAction("UserProfil", "UserProfil", new { id = (Session["LogedUserID"] as Hanger.Models.User).Id });
             }
             else
             {

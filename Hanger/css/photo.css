@@ -9,3 +9,6 @@ padding: 5px 10px;
 input[type="file"] {
     display: inherit;
 }
+.page-header{
+    margin-left:20px;
+}

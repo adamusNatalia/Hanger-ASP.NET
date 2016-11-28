@@ -112,10 +112,7 @@ namespace Hanger.Controllers
             var ad = from s in db.Ad
                      where (s.SubcategoryId == id)
                      select s;
-            if (ad == null)
-            {
-                return RedirectToAction("NoItems", "Catalog");
-            }
+
 
             var SizeLst = new List<string>();
 
@@ -246,6 +243,7 @@ namespace Hanger.Controllers
                 ad = ad.Where(x => x.Price <= to);
 
             }
+
             ad = ad.OrderByDescending(s => s.Id);
             return View(ad.ToList().ToPagedList(page ?? 1, 32));
         }

@@ -15,7 +15,10 @@ namespace Hanger.Controllers
         {
             return View();
         }
-
+        public ActionResult NoItems()
+        {
+            return View();
+        }
         public ActionResult UserCatalog(int id)
         {
             //User user = db.User.Find(id);
@@ -39,10 +42,15 @@ namespace Hanger.Controllers
             var ad = from s in db.Ad
                      where (s.UserId == id)
                      select s;
-            
+
             User u = db.User.Find(id);
             ViewBag.profilName = u.Profil_name;
+            if (ad.Count() == 0)
+            {
+                return RedirectToAction("NoItems", "UserProfil");
+            }
             return View(ad.ToList());
+
             //return View(user);
         }
 

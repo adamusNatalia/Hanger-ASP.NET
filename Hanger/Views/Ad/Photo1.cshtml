@@ -1,7 +1,9 @@
 ﻿
 @model Hanger.Models.Ad
 
+
 @Styles.Render("~/css/photo.css")
+
     ViewBag.Title = "Photo";
 }
 
@@ -30,7 +32,7 @@
 
 
                     <img src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))" width="250" />
-                    using (Html.BeginForm("Delete", "Ad", new { id = item.Id, adId = ViewBag.ad }, FormMethod.Post))
+                    using (Html.BeginForm("DeletePhoto", "Ad", new { id = item.Id, adId = ViewBag.ad }, FormMethod.Post))
                     {
                         @*@Html.Hidden("id", item.Id)*@
                         <input type="submit" value="Delete" class="btn btn-default" />

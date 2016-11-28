@@ -378,6 +378,8 @@
     <Content Include="Views\Ad\Photo1.cshtml" />
     <Content Include="Views\Ad\Edit.cshtml" />
     <Content Include="Views\UserProfil\UserProfil.cshtml" />
+    <Content Include="Views\Catalog\NoItems.cshtml" />
+    <Content Include="Views\UserProfil\NoItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

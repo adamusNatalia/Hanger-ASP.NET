@@ -5,23 +5,25 @@
 
 @Styles.Render("~/css/new.css")
 @Styles.Render("~/css/contact.css")
+
+
+<h2 class="page-header"><img alt="Brand" src="/Pictures/Icons/user1.png" style="width: 40px;margin-top: -3px;"> Moje ogłoszenia</h2>
+
 @{ int j = Model.Count() - 1;}
-
-<h2 class="page-header"><span class="glyphicon glyphicon-camera"></span>Moje ogłoszenia</h2>
-
 <div id="wrapper">
     <div id="columns">
 
-        @for (int i = 0; i < 8 && j>=0; i++)
+
+        @while (j >=0)
+
         {
 
             <a href="@Url.Action("Product", "Ad", new { id =  Model.ElementAt(j).Id })" class="navbar-left">
-            @*<a href="#" onclick="div_show()">*@
-                <div class="pin">
+                <div class="pin" style="break-inside: avoid-column;">
                     @{Boolean isPhoto = false; }
                     @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
                     {
-                        if (item.AdId == Model.ElementAt(j).Id && item.Main_photo == true && isPhoto == false)
+                        if (item.AdId == Model.ElementAt(j).Id && item.Main_photo == true)
                         {
 
                             <img src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))" /><br />
@@ -52,31 +54,5 @@
 
                         }
     </div>
-
-    <div id="abc">
-        <!-- Popup Div Starts Here -->
-        <div id="popupContact" style="margin-left: -200px;">
-            <!-- Contact Us Form -->
-
-            <form action="#" id="form" method="post" name="form">
-                <img id="close" src="~/Pictures/Icons/close.png" onclick="div_hide()">
-                <h2 style="font-size:26px">Wybierz akcję</h2>
-                <hr>
-
-
-                <input onclick="check_empty()" type="submit" class="btn" value="Podgląd" />
-                <input onclick="check_empty()" type="submit" class="btn" value="Edycja" />
-                <a href="/Register/Register" class="btn btn-info btn-block">Zarejestruj się już teraz!</a>
-                <a href="/Register/Register" class="btn btn-info btn-block">Zarejestruj się już teraz!</a>
-                <a href="@Url.Action("Product", "Ad", new { id =  Model.ElementAt(j).Id })" class="btn btn-info btn-block">Podgląd</a>
-
-
-                    @*<p><button class="btn btn-lg btn-success btn-block" type="submit" onclick="location.href='@Url.Action("SendMail", "Ad")'">Wyślij</button></p>*@
-</form>
-
-        </div>
-        <!-- Popup Div Ends Here -->
-    </div>
-
 </div>
 <script src="~/js/contact.js"></script>

@@ -17,7 +17,7 @@
         display:block;
     }
 
-}
+
 </style>
 <script src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
 
@@ -71,7 +71,7 @@
 
                 <div class="details-list__item-value">
 
-                    @if (HttpUtility.HtmlEncode(@Html.DisplayFor(model => model.Swap)) == "true")
+                    @if (Model.Swap == true)
                     {
                         <strong id="info"><span class="color">Tak</span></strong>
                     }
@@ -92,10 +92,20 @@
 
             </div>
 
-            <button id="popup" onclick="div_show()" class="btn btn-default">Wyślij wiadomość</button>
-            @if (Session["LogedUserID"]!=null &&(Session["LogedUserID"] as Hanger.Models.User).Id == Model.UserId) {
-                       <a href="@Url.Action("Edit", "Ad", new { id =  Model.Id })" class="btn btn-default2">Edycja</a>
-            }
+            
+           @if (Session["LogedUserID"]!=null &&(Session["LogedUserID"] as Hanger.Models.User).Id == Model.UserId) {
+                    <a href="@Url.Action("Edit", "Ad", new { id =  Model.Id })" class="btn btn-default2" style="margin-top: 10px;">Edycja ogłoszenia</a>
+
+               using (Html.BeginForm("Delete", "Ad", new { adId = Model.Id }, FormMethod.Post, new { style = "border:0px; padding:0px; margin-top: 10px;" }))
+               {
+                @*@Html.Hidden("id", item.Id)*@
+                <input type="submit" value="Usuń ogłoszenie" class="btn btn-default"  />
+               }
+           }
+           else
+           {
+            <button id="popup" onclick="div_show()" class="btn btn-default" style="margin-top: 10px;">Wyślij wiadomość</button>
+           }
 
 
 

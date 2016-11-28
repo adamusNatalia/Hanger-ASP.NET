@@ -70,3 +70,14 @@ padding-left: 16px; /* Or size of icon + spacing */
     line-height: 1.4;
     text-align: center;
 }
+
+.validation-summary-errors{
+    margin-top: 90px;
+    margin-bottom: -80px;
+}
+.validation-summary-errors ul{
+   text-align: center;
+   list-style-type: none;
+   color: #dc679a;
+}
+    

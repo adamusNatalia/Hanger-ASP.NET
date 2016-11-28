@@ -80,6 +80,7 @@ namespace Hanger.Controllers
 
         public ActionResult New()
         {
+            SwapDropDownList();
             SizeDropDownList();
             BrandDropDownList();
             ColorDropDownList();
@@ -135,7 +136,8 @@ namespace Hanger.Controllers
                 //Log the error (uncomment dex variable name and add a line here to write a log.)
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
-        
+
+            SwapDropDownList(A.Swap);
             SizeDropDownList(A.SizeId);
             BrandDropDownList(A.BrandId);
             ColorDropDownList(A.ColorId);
@@ -158,6 +160,7 @@ namespace Hanger.Controllers
             {
                 return HttpNotFound();
             }
+            SwapDropDownList(ad.Swap);
             SizeDropDownList(ad.SizeId);
             BrandDropDownList(ad.BrandId);
             ColorDropDownList(ad.ColorId);
@@ -231,12 +234,24 @@ namespace Hanger.Controllers
                 return RedirectToAction("Photo1", "Ad", new { id = A.Id });
 
             }
+            SwapDropDownList(A.Swap);
             SizeDropDownList(A.SizeId);
             BrandDropDownList(A.BrandId);
             ColorDropDownList(A.ColorId);
             ConditionDropDownList(A.ConditionId);
             SubcategoryDropDownList(A.SubcategoryId);
             return View(A);
+        }
+
+        private void SwapDropDownList(object selectedSwap = null)
+        {
+            List<SelectListItem> Swap = new List<SelectListItem>();
+            Swap.Add(new SelectListItem() { Text = "Tak", Value = "True" });
+            Swap.Add(new SelectListItem() { Text = "Nie", Value = "False" });
+
+            ViewBag.Swap = new SelectList(Swap, "Value", "Text", selectedSwap);
+           
+         
         }
 
         private void SizeDropDownList(object selectedSize = null)
@@ -536,7 +551,31 @@ namespace Hanger.Controllers
             return RedirectToAction("Photo1", "Ad", new { id = adId });
         }
         [HttpPost]
-        public ActionResult Delete(int id, int adId)
+        public ActionResult Delete(int adId)
+        {
+            using (HangerDatabase DataContext = new HangerDatabase())
+            {
+                var photoToDelete = (from p in DataContext.Photos
+                                     where p.AdId == adId
+                                     select p);
+                while (photoToDelete.Count() > 0)
+                {   
+                    DataContext.Photos.Remove(photoToDelete.FirstOrDefault());
+                    DataContext.SaveChanges();
+                }
+                var ad = (from p in DataContext.Ad
+                                     where p.Id == adId
+                                     select p).FirstOrDefault();
+
+                DataContext.Ad.Remove(ad);
+                DataContext.SaveChanges();
+            }
+            
+            return RedirectToAction("UserProfil", "UserProfil", new { id = (Session["LogedUserID"] as Hanger.Models.User).Id });
+        }
+
+        [HttpPost]
+        public ActionResult DeletePhoto(int id, int adId)
         {
             using (HangerDatabase DataContext = new HangerDatabase())
             {
@@ -551,7 +590,7 @@ namespace Hanger.Controllers
             return RedirectToAction("Photo1", "Ad", new { id = adId });
         }
 
-            [HttpPost]
+        [HttpPost]
         public ActionResult SendMail2(string email, string body, string subject, string to, int id )
         {
             var user = from p in db.User
