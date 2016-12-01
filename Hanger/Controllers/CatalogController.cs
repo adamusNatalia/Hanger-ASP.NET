@@ -110,9 +110,17 @@ namespace Hanger.Controllers
         {
 
             var ad = from s in db.Ad
-                     where (s.SubcategoryId == id)
+                    where (s.SubcategoryId == id)
                      select s;
 
+            var sub= from s in db.Subcategory
+                     where (s.Id == id)
+                     select s.Name;
+        
+            ViewBag.subcategory = sub.FirstOrDefault();
+
+            //ViewBag.subcategory = ad.FirstOrDefault().Subcategory.Name;
+            
 
             var SizeLst = new List<string>();
 
@@ -178,22 +186,22 @@ namespace Hanger.Controllers
             //              where (d.Name == color)
             //              select d.Id;
             List<SelectListItem> Price = new List<SelectListItem>();
-            Price.Add(new SelectListItem() { Text = "10", Value = "10" });
-            Price.Add(new SelectListItem() { Text = "20", Value = "20" });
-            Price.Add(new SelectListItem() { Text = "30", Value = "30" });
-            Price.Add(new SelectListItem() { Text = "40", Value = "40" });
-            Price.Add(new SelectListItem() { Text = "50", Value = "50" });
-            Price.Add(new SelectListItem() { Text = "60", Value = "60" });
-            Price.Add(new SelectListItem() { Text = "70", Value = "70" });
-            Price.Add(new SelectListItem() { Text = "80", Value = "80" });
-            Price.Add(new SelectListItem() { Text = "90", Value = "90" });
-            Price.Add(new SelectListItem() { Text = "100", Value = "100" });
-            Price.Add(new SelectListItem() { Text = "110", Value = "110" });
-            Price.Add(new SelectListItem() { Text = "120", Value = "120" });
-            Price.Add(new SelectListItem() { Text = "130", Value = "130" });
-            Price.Add(new SelectListItem() { Text = "140", Value = "140" });
-            Price.Add(new SelectListItem() { Text = "150", Value = "150" });
-            Price.Add(new SelectListItem() { Text = "200", Value = "200" });
+            Price.Add(new SelectListItem() { Text = "10 zł", Value = "10" });
+            Price.Add(new SelectListItem() { Text = "20 zł", Value = "20" });
+            Price.Add(new SelectListItem() { Text = "30 zł", Value = "30" });
+            Price.Add(new SelectListItem() { Text = "40 zł", Value = "40" });
+            Price.Add(new SelectListItem() { Text = "50 zł", Value = "50" });
+            Price.Add(new SelectListItem() { Text = "60 zł", Value = "60" });
+            Price.Add(new SelectListItem() { Text = "70 zł", Value = "70" });
+            Price.Add(new SelectListItem() { Text = "80 zł", Value = "80" });
+            Price.Add(new SelectListItem() { Text = "90 zł", Value = "90" });
+            Price.Add(new SelectListItem() { Text = "100 zł", Value = "100" });
+            Price.Add(new SelectListItem() { Text = "110 zł", Value = "110" });
+            Price.Add(new SelectListItem() { Text = "120 zł", Value = "120" });
+            Price.Add(new SelectListItem() { Text = "130 zł", Value = "130" });
+            Price.Add(new SelectListItem() { Text = "140 zł", Value = "140" });
+            Price.Add(new SelectListItem() { Text = "150 zł", Value = "150" });
+            Price.Add(new SelectListItem() { Text = "200 zł", Value = "200" });
 
             ViewBag.price1 = new SelectList(Price, "Value", "Text");
             ViewBag.price2 = new SelectList(Price, "Value", "Text");
@@ -311,22 +319,22 @@ namespace Hanger.Controllers
 
 
             List<SelectListItem> Price = new List<SelectListItem>();
-            Price.Add(new SelectListItem() { Text = "10", Value = "10" });
-            Price.Add(new SelectListItem() { Text = "20", Value = "20" });
-            Price.Add(new SelectListItem() { Text = "30", Value = "30" });
-            Price.Add(new SelectListItem() { Text = "40", Value = "40" });
-            Price.Add(new SelectListItem() { Text = "50", Value = "50" });
-            Price.Add(new SelectListItem() { Text = "60", Value = "60" });
-            Price.Add(new SelectListItem() { Text = "70", Value = "70" });
-            Price.Add(new SelectListItem() { Text = "80", Value = "80" });
-            Price.Add(new SelectListItem() { Text = "90", Value = "90" });
-            Price.Add(new SelectListItem() { Text = "100", Value = "100" });
-            Price.Add(new SelectListItem() { Text = "110", Value = "110" });
-            Price.Add(new SelectListItem() { Text = "120", Value = "120" });
-            Price.Add(new SelectListItem() { Text = "130", Value = "130" });
-            Price.Add(new SelectListItem() { Text = "140", Value = "140" });
-            Price.Add(new SelectListItem() { Text = "150", Value = "150" });
-            Price.Add(new SelectListItem() { Text = "200", Value = "200" });
+            Price.Add(new SelectListItem() { Text = "10 zł", Value = "10" });
+            Price.Add(new SelectListItem() { Text = "20 zł", Value = "20" });
+            Price.Add(new SelectListItem() { Text = "30 zł", Value = "30" });
+            Price.Add(new SelectListItem() { Text = "40 zł", Value = "40" });
+            Price.Add(new SelectListItem() { Text = "50 zł", Value = "50" });
+            Price.Add(new SelectListItem() { Text = "60 zł", Value = "60" });
+            Price.Add(new SelectListItem() { Text = "70 zł", Value = "70" });
+            Price.Add(new SelectListItem() { Text = "80 zł", Value = "80" });
+            Price.Add(new SelectListItem() { Text = "90 zł", Value = "90" });
+            Price.Add(new SelectListItem() { Text = "100 zł", Value = "100" });
+            Price.Add(new SelectListItem() { Text = "110 zł", Value = "110" });
+            Price.Add(new SelectListItem() { Text = "120 zł", Value = "120" });
+            Price.Add(new SelectListItem() { Text = "130 zł", Value = "130" });
+            Price.Add(new SelectListItem() { Text = "140 zł", Value = "140" });
+            Price.Add(new SelectListItem() { Text = "150 zł", Value = "150" });
+            Price.Add(new SelectListItem() { Text = "200 zł", Value = "200" });
 
             ViewBag.price1 = new SelectList(Price, "Value", "Text");
             ViewBag.price2 = new SelectList(Price, "Value", "Text");

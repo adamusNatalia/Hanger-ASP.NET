@@ -303,7 +303,11 @@
     <Content Include="Pictures\Icons\close.png" />
     <Content Include="Pictures\Icons\envelope.png" />
     <Content Include="Pictures\Icons\error.png" />
+    <Content Include="Pictures\Icons\hanger.png" />
+    <Content Include="Pictures\Icons\loupe.png" />
     <Content Include="Pictures\Icons\pen.png" />
+    <Content Include="Pictures\Icons\search.png" />
+    <Content Include="Pictures\Icons\search2.png" />
     <Content Include="Pictures\Icons\user.png" />
     <Content Include="Pictures\Icons\user1.png" />
     <Content Include="Pictures\Icons\user2.png" />

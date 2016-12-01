@@ -1,4 +1,11 @@
-﻿.page-header{
+﻿body {
+    padding-bottom: 40px;
+    color: #5a5a5a;
+    background-color: #ebebeb;
+    overflow-x: hidden;
+}
+
+.page-header{
     margin-left:20px;
 }
 
@@ -7,5 +14,21 @@ input, select{
 }
 
 .form-horizontal{
-    margin-top:100px;
+    margin-top:80px;
+}
+
+.field-validation-error{
+    display:block;
+}
+
+.form{
+    width: 15%;
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+    text-align: right;
+}
+
+.input-group-addon:not(:first-child):not(:last-child){
+    border-bottom-right-radius: 6px; 
+    border-top-right-radius: 6px;
 }

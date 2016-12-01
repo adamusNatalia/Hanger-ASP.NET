@@ -59,12 +59,12 @@ font-size:16px;
 background-color:none;
 }
 #name {
-background-image:url(../Pictures/Icons/avatar.png);
+background-image:url(../Pictures/Icons/envelope.png);
 background-repeat:no-repeat;
 background-position:5px 7px
 }
 #email {
-background-image:url(../Pictures/Icons/envelope.png);
+background-image:url(../Pictures/Icons/avatar.png);
 background-repeat:no-repeat;
 background-position:5px 7px
 }

@@ -88,19 +88,23 @@
 
                     }
                    
-                   @if(isPhoto==false){
-                    <img src="~/Pictures/dress.jpg" /><br />
+                    @if(isPhoto==false)
+                    {
+                        <img src="~/Pictures/dress.jpg" /><br />
                     }
-                    @if((@Html.DisplayFor(p => p.ElementAt(j).Brand.Name)).ToString() ==""){ 
-                    <p class="alignleft">
 
-                        <b>@Html.DisplayFor(p => p.ElementAt(j).Size.Name)</b>
-                    </p>
-                    <p class="alignright">
 
-                        <b> @Html.DisplayFor(p => p.ElementAt(j).Price) zł</b>
-                    </p>
-                   
+                    @if ((@Html.DisplayFor(p => p.ElementAt(j).Brand.Name)).ToString() == "")
+                    {
+                        <p class="alignright" style="width:100%">
+
+                            <b> @Html.DisplayFor(p => p.ElementAt(j).Price) zł</b>
+                        </p>
+                        <p class="right">
+
+                            <b>@Html.DisplayFor(p => p.ElementAt(j).Size.Name)</b>
+                        </p>
+
                     }
                     else
                     {
@@ -182,18 +186,33 @@
                     }
 
                 }
-                <p class="alignleft">
+                @if ((@Html.DisplayFor(p => p.ElementAt(j).Brand.Name)).ToString() == "")
+                {
+                    <p class="alignright" style="width:100%">
 
-                    <b>@Html.DisplayFor(p => p.ElementAt(j).Brand.Name)</b>
-                </p>
-                <p class="alignright">
+                        <b> @Html.DisplayFor(p => p.ElementAt(j).Price) zł</b>
+                    </p>
+                        <p class="right">
 
-                    <b> @Html.DisplayFor(p => p.ElementAt(j).Price) zł</b>
-                </p>
-                <p class="right">
+                            <b>@Html.DisplayFor(p => p.ElementAt(j).Size.Name)</b>
+                        </p>
 
-                    <b>@Html.DisplayFor(p => p.ElementAt(j).Size.Name)</b>
-                </p>
+                }
+                else
+                {
+                    <p class="alignleft">
+
+                        <b>@Html.DisplayFor(p => p.ElementAt(j).Brand.Name)</b>
+                    </p>
+                        <p class="alignright">
+
+                            <b> @Html.DisplayFor(p => p.ElementAt(j).Price) zł</b>
+                        </p>
+                        <p class="right">
+
+                            <b>@Html.DisplayFor(p => p.ElementAt(j).Size.Name)</b>
+                        </p>
+                }
             </div>
         </a>
 

@@ -31,6 +31,14 @@ namespace Hanger.Controllers
         {
             Ad advertisement = db.Ad.Find(Id);
 
+            const int MaxLength = 10;
+            var name = advertisement.Date_start.ToString();
+            if (name.Length > MaxLength)
+                name = name.Substring(0, MaxLength);
+            //DateTime dateAndTime = advertisement.Date_start;
+            ViewBag.date = name;
+
+
             return View(advertisement);
         }
         public ActionResult Photo1(int Id)
@@ -109,6 +117,7 @@ namespace Hanger.Controllers
                     try
                     {
                         db.SaveChanges();
+
                     }
                     catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
                     {
@@ -130,6 +139,19 @@ namespace Hanger.Controllers
                     ModelState.Clear();
                     
                 }
+                else
+                {
+                    SwapDropDownList(A.Swap);
+                    SizeDropDownList(A.SizeId);
+                    BrandDropDownList(A.BrandId);
+                    ColorDropDownList(A.ColorId);
+                    ConditionDropDownList(A.ConditionId);
+                    SubcategoryDropDownList(A.SubcategoryId);
+
+
+
+                    return View(A);
+                }
             }
             catch (RetryLimitExceededException /* dex */)
             {
@@ -148,6 +170,7 @@ namespace Hanger.Controllers
 
             //return View(A);
             return RedirectToAction("Photo1", "Ad", new { id = adId });
+            
         }
         public ActionResult Edit(int id)
         {
@@ -206,9 +229,11 @@ namespace Hanger.Controllers
         [HttpPost]
         public ActionResult Edit(Ad A)
         {
+           // ModelState.Remove("Date_start");
             if (ModelState.IsValid)
             {
                 A.UserId = (Session["LogedUserID"] as User).Id;
+                A.Date_start = DateTime.Now;
                 db.Entry(A).State = EntityState.Modified;
                 try
                 {
@@ -593,34 +618,40 @@ namespace Hanger.Controllers
         [HttpPost]
         public ActionResult SendMail2(string email, string body, string subject, string to, int id )
         {
-            var user = from p in db.User
-                       where p.Profil_name == to
-                       select p;
+            if (email != "" && subject != "" && body != "")
+            {
+                var user = from p in db.User
+                           where p.Profil_name == to
+                           select p;
 
-            string adId = id.ToString();
-            MailMessage msg = new MailMessage();
-          
-            String emailTo = user.First().Mail;
+                string adId = id.ToString();
+                MailMessage msg = new MailMessage();
 
-            msg.To.Add(emailTo);
-            //msg.To.Add("hanger.natalia@gmail.com");
-            msg.From = new MailAddress(email);
-           // msg.From = new MailAddress("hanger.natalia@gmail.com",email);
-            msg.Sender= new MailAddress(email);
-           
-            msg.Subject = subject;
-            
-            msg.Body = "Witaj," + Environment.NewLine + @"Użytkownik jest zainteresowanya Twoim ogłoszeniem: http://localhost:15054/Ad/Product/"+adId + Environment.NewLine+ @body
-                + Environment.NewLine + "Pozdrawiam," + Environment.NewLine + "Hanger Sp.ZOO"; ;
-            msg.Priority = MailPriority.Normal;
+                String emailTo = user.First().Mail;
 
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                msg.To.Add(emailTo);
+                //msg.To.Add("hanger.natalia@gmail.com");
+                //msg.From = new MailAddress(email);
+                msg.From = new MailAddress("hanger.natalia@gmail.com",email);
+                //msg.Sender = new MailAddress(email);
 
-            client.Credentials = new NetworkCredential("hanger.natalia@gmail.com", "hangertest");
+                msg.Subject = subject;
 
-            client.EnableSsl = true;
-    
-            client.Send(msg);
+                msg.Body = "Dzień dobry," + Environment.NewLine 
+                    + Environment.NewLine + @"Użytkownik "+@email+" jest zainteresowany Twoim ogłoszeniem: http://localhost:15054/Ad/Product/" + adId + Environment.NewLine
+                    + Environment.NewLine + "Treść wiadomości od użytkownika: " + Environment.NewLine
+                    + Environment.NewLine  + @body+ Environment.NewLine
+                    + Environment.NewLine + "Pozdrawiamy serdecznie," + Environment.NewLine + "Zespół Hanger" ;
+                msg.Priority = MailPriority.Normal;
+
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+
+                client.Credentials = new NetworkCredential("hanger.natalia@gmail.com", "hangertest");
+
+                client.EnableSsl = true;
+
+                client.Send(msg);
+            }
             return RedirectToAction("Product", "Ad", new { Id = id });
         }
 

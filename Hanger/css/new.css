@@ -1,7 +1,5 @@
 ﻿
-body {
-	background: url(http://subtlepatterns.com/patterns/scribble_light.png) ;
-}
+
 
 #wrapper {
 	max-width: 800px;
@@ -20,7 +18,9 @@ body {
 	column-gap: 30px;
 	column-fill: auto;
 }
-
+.pin{
+    break-inside: avoid-column;
+}
 
 #container
 {
@@ -51,6 +51,11 @@ body {
     top:350px;
 }
 
+.no-items{
+    font-size:30px;
+    margin-top:100px;
+    text-align:center;
+}
 
  .business-header .intro-content {
     color: white;
@@ -199,7 +204,7 @@ p.left {
 
 select {
     
-    height: 29px;
+    height: 25px;
     overflow: hidden;
     border-radius: 5px;
     color: #dc679a;
@@ -216,15 +221,24 @@ label{
 table{
     margin-left:20%;
     font-size: 12px;
-    margin: 20px auto;
+    margin: 0px auto;
 }
-
+.table > tbody > tr > th, .table > tbody > tr > td{
+    padding: 4px;
+    border:0px;
+}
 .btn.btn-search{
-    background-color: #dc679a;
     color: #FFFFFF;
-    border: 2px solid #dc679a;
+    border:0px;
     border-radius:6px;
-    margin-top: 3px;
+    background-image:url(../Pictures/Icons/search.png);
+    background-color:#ffffff;
+    width:20px;
+     width: 20px;
+    background-size: 20px;
+    background-position-y: px;
+    background-repeat: no-repeat;
+    margin-top: 2px;
 }
 
 .pagination > li > a, .pagination > li > span {
@@ -235,4 +249,21 @@ table{
     display: table;
     margin: 0 auto 0 auto;
     font-size: 12px;
+}
+a {
+    color: #dc679a;
+    text-decoration: none;
+}
+
+.page-header {
+    text-align: center;
+    margin-top: 92px;
+    border: 0px;
+    font-size: 22px;
+    MARGIN-BOTTOM: 0px;
+}
+
+.img-header{
+    width: 28px;
+    margin-top: -3px
 }

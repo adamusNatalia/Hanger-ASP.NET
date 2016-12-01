@@ -5,18 +5,20 @@
 
 @Styles.Render("~/css/new.css")
 @Styles.Render("~/css/contact.css")
+
+
+<h2 class="page-header"><img alt="Brand" src="~/Pictures/Icons/user1.png" class="img-header"> Ogłoszenia użytkownika @ViewBag.profilName</h2>
+
 @{ int j = Model.Count() - 1;}
-
-<h2 class="page-header"><img alt="Brand" src="/Pictures/Icons/user1.png" style="width: 40px;margin-top: -3px;"> Ogłoszenia użytkownika @ViewBag.profilName</h2>
-
 <div id="wrapper">
     <div id="columns">
 
-        @for (int i = 0; i < 8 && j>=0; i++)
+
+        @while (j >= 0)
+
         {
 
             <a href="@Url.Action("Product", "Ad", new { id =  Model.ElementAt(j).Id })" class="navbar-left">
-            @*<a href="#" onclick="div_show()">*@
                 <div class="pin">
                     @{Boolean isPhoto = false; }
                     @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
@@ -34,26 +36,45 @@
                     {
                         <img src="~/Pictures/dress.jpg" /><br />
                     }
-                    <p class="alignleft">
 
-                        <b>@Html.DisplayFor(p => p.ElementAt(j).Brand.Name)</b>
-                    </p>
-                    <p class="alignright">
 
-                        <b> @Html.DisplayFor(p => p.ElementAt(j).Price) zł</b>
-                    </p>
-                    <p class="right">
+                    @if ((@Html.DisplayFor(p => p.ElementAt(j).Brand.Name)).ToString() == "")
+                    {
+                        <p class="alignright" style="width:100%">
 
-                        <b>@Html.DisplayFor(p => p.ElementAt(j).Size.Name)</b>
-                    </p>
+                            <b> @Html.DisplayFor(p => p.ElementAt(j).Price) zł</b>
+                        </p>
+                        <p class="right">
+
+                            <b>@Html.DisplayFor(p => p.ElementAt(j).Size.Name)</b>
+                        </p>
+
+                    }
+                    else
+                    {
+                        <p class="alignleft">
+
+                            <b>@Html.DisplayFor(p => p.ElementAt(j).Brand.Name)</b>
+                        </p>
+                        <p class="alignright">
+
+                            <b> @Html.DisplayFor(p => p.ElementAt(j).Price) zł</b>
+                        </p>
+                        <p class="right">
+
+                            <b>@Html.DisplayFor(p => p.ElementAt(j).Size.Name)</b>
+                        </p>
+                    }
                 </div>
             </a>
                             j--;
 
                         }
     </div>
+</div>
 
-    <div id="abc">
+
+    @*<div id="abc">
         <!-- Popup Div Starts Here -->
         <div id="popupContact" style="margin-left: -200px;">
             <!-- Contact Us Form -->
@@ -71,12 +92,12 @@
                 <a href="@Url.Action("Product", "Ad", new { id =  Model.ElementAt(j).Id })" class="btn btn-info btn-block">Podgląd</a>
 
 
-                    @*<p><button class="btn btn-lg btn-success btn-block" type="submit" onclick="location.href='@Url.Action("SendMail", "Ad")'">Wyślij</button></p>*@
+                    <p><button class="btn btn-lg btn-success btn-block" type="submit" onclick="location.href='@Url.Action("SendMail", "Ad")'">Wyślij</button></p>
 </form>
 
         </div>
         <!-- Popup Div Ends Here -->
-    </div>
+    </div>*@
 
-</div>
+
 <script src="~/js/contact.js"></script>

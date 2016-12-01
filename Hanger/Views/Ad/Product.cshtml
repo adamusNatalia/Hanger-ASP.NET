@@ -25,10 +25,18 @@
     <article id="mainview">
         
         <div id="description">
+
+            <div style="text-align:right; font-size:11px">
+                Data dodania: @ViewBag.date
+            </div>
+
+
             <h1>@Html.DisplayFor(model => model.Title)</h1>
             <strong id="price">@Html.DisplayFor(model => model.Price) zł</strong>
             <p>@Html.DisplayFor(model => model.Description) </p>
             <div>
+            @if ((@Html.DisplayFor(model => model.Brand.Name)).ToString() != "")
+            { 
                 <div class="details-list__item-title">
                     <strong id="info"><span class="title">Marka  </span></strong>
                 </div>
@@ -36,6 +44,7 @@
                 <div class="details-list__item-value">
                     <strong id="info"><span class="color">@Html.DisplayFor(model => model.Brand.Name)</span></strong>
                 </div>
+            }
                 <div class="details-list__item-title">
                     <strong id="info"><span class="title">Rozmiar  </span></strong>
                 </div>
@@ -87,9 +96,12 @@
 
                 <div class="details-list__item-value">
                     @*<strong id="info"><span class="color">@Html.DisplayFor(model => model.User.Profil_name)</span></strong>*@
-                    <a href="@Url.Action("UserCatalog", "UserProfil", new { Id=Model.UserId})"><strong id="info"><span class="color">@Html.DisplayFor(model => model.User.Profil_name)</span></strong></a>
+                    <a href="@Url.Action("UserCatalog", "UserProfil", new { Id=Model.UserId})"><strong id="info"><span class="color" style="color: #dc679a; font-weight: bold;">@Html.DisplayFor(model => model.User.Profil_name)</span></strong></a>
                 </div>
 
+
+
+               
             </div>
 
             

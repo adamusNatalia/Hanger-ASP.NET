@@ -29,7 +29,10 @@ namespace Hanger.Controllers
                      select s;
             User u = db.User.Find(id);
             ViewBag.profilName = u.Profil_name;
-
+            if (ad.Count() == 0)
+            {
+                return RedirectToAction("NoItems", "UserProfil");
+            }
             return View(ad.ToList());
             //return View(user);
         }

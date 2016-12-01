@@ -4,13 +4,13 @@
 
 @Styles.Render("~/css/photo.css")
 
-    ViewBag.Title = "Photo";
-}
+
+
 
 
 <div class="row">
     <div class="col-lg-12">
-        <h2 class="page-header"><span class="glyphicon glyphicon-camera"></span> Wybierz zdjęcie główne</h2>
+        <h3 class="page-header"><span class="glyphicon glyphicon-camera"></span> Wybierz zdjęcie główne</h3>
 
         @using (Html.BeginForm("MainPhoto", "Ad", new { adId = ViewBag.ad }, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
@@ -35,7 +35,7 @@
                     using (Html.BeginForm("DeletePhoto", "Ad", new { id = item.Id, adId = ViewBag.ad }, FormMethod.Post))
                     {
                         @*@Html.Hidden("id", item.Id)*@
-                        <input type="submit" value="Delete" class="btn btn-default" />
+                        <input type="submit" value="Usuń" class="btn btn-default" />
                     }
 
                 }
@@ -49,7 +49,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h2 class="page-header"><span class="glyphicon glyphicon-camera"></span> Dodaj pozostałe zdjęcia</h2>
+        <h3 class="page-header"><span class="glyphicon glyphicon-camera"></span> Dodaj pozostałe zdjęcia</h3>
 
         @using (Html.BeginForm("AddPhoto", "Ad", new { adId = ViewBag.ad }, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
@@ -64,7 +64,7 @@
         @{int cellCount = 0; }
         @if (Session["LogedUserID"] != null)
         {
-            <table class="table-condensed" width="500" height="500" cellpadding="10">
+            <table class="table-condensed"  cellpadding="10">
                 @foreach (var item in new Hanger.Models.HangerDatabase().Photos.ToList().Where(p => p.AdId == Model.Id))
                 {
                     if (item.Main_photo == false)
@@ -77,10 +77,10 @@
                     <td>
 
                         <img src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))" width="250" />
-                        @using (Html.BeginForm("Delete", "Ad", new { id = item.Id, adId = ViewBag.ad }, FormMethod.Post))
+                        @using (Html.BeginForm("DeletePhoto", "Ad", new { id = item.Id, adId = ViewBag.ad }, FormMethod.Post))
                         {
                         @*@Html.Hidden("id", item.Id)*@
-                        <input type="submit" value="Delete" class="btn btn-default" />
+                        <input type="submit" value="Usuń" class="btn btn-default" />
                         }
 
                         
@@ -105,6 +105,6 @@
 
 <div class="row">
     <div class="col-md-10">
-        <a href="@Url.Action("Product", "Ad", new { id =  Model.Id })" class="btn btn-default" style="width:50%">Podgląd ogłoszenia</a>
+        <a href="@Url.Action("Product", "Ad", new { id =  Model.Id })" class="btn btn-default view" style="width:50%">Podgląd ogłoszenia</a>
     </div>
 </div>
