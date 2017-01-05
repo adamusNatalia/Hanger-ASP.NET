@@ -255,6 +255,7 @@
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
     <Content Include="css\bootstrap.min2.css" />
+    <Content Include="css\nav.css" />
     <Content Include="css\photo.css" />
     <Content Include="css\dropdown.css" />
     <Content Include="css\account.css" />
@@ -384,6 +385,10 @@
     <Content Include="Views\UserProfil\UserProfil.cshtml" />
     <Content Include="Views\Catalog\NoItems.cshtml" />
     <Content Include="Views\UserProfil\NoItems.cshtml" />
+    <Content Include="Views\UserProfil\Catalog.cshtml" />
+    <Content Include="Views\Login\AfterRegister.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

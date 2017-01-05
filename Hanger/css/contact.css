@@ -131,3 +131,11 @@ h2{
     border-bottom: 0px;
     background-color: #fff;
 }
+
+@media (min-width: 960px) {
+
+    /* Remove the edge padding needed for mobile */
+    article {
+        width: 960px;
+    }
+}

@@ -42,7 +42,7 @@
     border-radius:6px;
 }
 
-input, button, select, textarea {
+input, select, textarea {
     display: block;
     width: 100%;
     height: 39px;
@@ -82,6 +82,7 @@ padding-left: 16px; /* Or size of icon + spacing */
 .validation-summary-errors{
     margin-top: 90px;
     margin-bottom: -80px;
+    font-size: 20px;
 }
 .validation-summary-errors ul{
    text-align: center;

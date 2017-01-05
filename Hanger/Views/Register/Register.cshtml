@@ -21,7 +21,7 @@
            
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-xs-12 col-md-6">
                         <div class="well">
                             <form id="loginForm" method="POST" action="/login/" novalidate="novalidate">
                                 <div class="form-group">
@@ -41,18 +41,18 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Confirm_assword" class="control-label">Powtórz hasło</label>
-                                     @Html.EditorFor(model => model.ConfirmPassword)
-                                     @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                                    @Html.EditorFor(model => model.ConfirmPassword)
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
                                 </div>
                                 <input type="submit" value="Zarejestruj się" class="btn btn-default" />
                             </form>
                         </div>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-12 col-md-6">
                         <p class="lead">Zarejestruj się <span class="text-success">ZA DARMO</span></p>
                         <ul class="list-unstyled" style="line-height: 2">
                             <li><span class="fa fa-check text-success"></span> Dodawaj nieskończoną ilość ogłoszeń </li>
-                            <li><span class="fa fa-check text-success"></span> Wymieniaj się z innymi ubraniami</li>     
+                            <li><span class="fa fa-check text-success"></span> Wymieniaj się z innymi ubraniami</li>
                             <li><span class="fa fa-check text-success"></span> Inspiruj innych swoim stylem</li>
                         </ul>
                         <p class="lead-center"><span class="text-success">Masz już konto?</span></p>

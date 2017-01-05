@@ -11,8 +11,7 @@ namespace Hanger.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-
+    
     public partial class Size
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -29,6 +28,5 @@ namespace Hanger.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ad> Ad { get; set; }
-        public IQueryable<int> AdId { get; internal set; }
     }
 }

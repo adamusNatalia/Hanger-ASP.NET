@@ -9,7 +9,7 @@
     margin-left:20px;
 }
 
-input, select{
+input, select,textarea{
     width:50%;
 }
 
@@ -19,6 +19,7 @@ input, select{
 
 .field-validation-error{
     display:block;
+    white-space: nowrap;
 }
 
 .form{
@@ -31,4 +32,11 @@ input, select{
 .input-group-addon:not(:first-child):not(:last-child){
     border-bottom-right-radius: 6px; 
     border-top-right-radius: 6px;
+}
+
+@media (max-width: 768px) {
+
+ input, select, textarea {
+    width: 100%;
+}
 }

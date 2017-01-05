@@ -10,8 +10,8 @@
 <style>
     nav {
     display:inline-block;
-    vertical-align: middle;
     width:150px;
+        vertical-align: middle;
     }
     a{
         display:block;
@@ -135,7 +135,7 @@
                         <input id="email" name="email" placeholder="Email" type="text">
                         <textarea id="msg" name="body" placeholder="Wiadomość"></textarea>
 
-                        <input onclick="check_empty()" type="submit" class="btn" value="Wyślij" />
+                        <input onclick="check_empty()" type="submit" id="sumbit" class="btn" value="Wyślij" />
 
 
                         @*<p><button class="btn btn-lg btn-success btn-block" type="submit" onclick="location.href='@Url.Action("SendMail", "Ad")'">Wyślij</button></p>*@
@@ -211,8 +211,6 @@
 
         <aside class="preview">
 
-
-
             <nav>
                 @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
                 {
@@ -227,17 +225,21 @@
 
                 }
 
-            </nav>
-            @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
+            </nav> 
+            
+             @foreach (var item in new Hanger.Models.HangerDatabase().Photos)
             {
                 if (item.AdId == Model.Id && item.Main_photo == true)
                 {
 
-                    <img id="main" src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))" height="550" style="max-width:410px" /><br />
+                    <img id="main" src="@System.String.Format("data:{0};base64,{1}", item.Type, Convert.ToBase64String(item.Photo))" height="550" style="max-width:410px;margin-top:50px"  /><br />
 
                 }
 
             }
+
+
+          
         </aside>
 </article>
 

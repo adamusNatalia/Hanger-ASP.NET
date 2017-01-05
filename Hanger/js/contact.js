@@ -2,9 +2,9 @@
 function check_empty() {
     if (document.getElementById('name').value == "" || document.getElementById('email').value == "" || document.getElementById('msg').value == "") {
         alert("Wypełnij cały formularz");
-        document.getElementById('abc').style.display = "none";
+       // document.getElementById('abc').style.display = "none";
     } else {
-        document.getElementById('form').submit();
+        //document.getElementById('sumbit').submit();
         alert("Wiadomość została wysłana");
 
     }
